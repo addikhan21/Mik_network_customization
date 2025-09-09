@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Define Custom Categories -->
+    <record id="module_category_custom" model="ir.module.category">
+        <field name="name">System Management</field>
+        <field name="description">Mdule category for managing different departments</field>
+        <field name="sequence">10</field>
+    </record>
+
+    <!-- Sales Group -->
+    <record id="group_sales" model="res.groups">
+        <field name="name">Sales</field>
+        <field name="category_id" ref="module_category_custom"/>
+    </record>
+
+    <!-- NOC Group -->
+    <record id="group_noc" model="res.groups">
+        <field name="name">NOC</field>
+        <field name="category_id" ref="module_category_custom"/>
+    </record>
+    
+    <!-- Support Group -->
+    <record id="group_support" model="res.groups">
+        <field name="name">Support</field>
+        <field name="category_id" ref="module_category_custom"/>
+    </record>
+
+    <!-- Distributor Group -->
+    <record id="group_distributor" model="res.groups">
+        <field name="name">Distributor</field>
+        <field name="category_id" ref="module_category_custom"/>
+    </record>
+
+    <!-- Accounts Group -->
+    <record id="group_accounts" model="res.groups">
+        <field name="name">Accounts</field>
+        <field name="category_id" ref="module_category_custom"/>
+    </record>
+
+    <!-- Admin Group -->
+    <record id="group_admin" model="res.groups">
+        <field name="name">Admin</field>
+        <field name="category_id" ref="module_category_custom"/>
+        <field name="implied_ids" eval="[(4, ref('group_sales')), (4, ref('group_noc')), (4, ref('group_distributor')), (4, ref('group_accounts'))]"/>
+    </record>
+</odoo>
