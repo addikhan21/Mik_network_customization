@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- View radius.accounting View Tree -->
+    <record id="view_radius_accounting_tree" model="ir.ui.view">
+        <field name="name">view.radius.accounting.list</field>
+        <field name="model">radius.accounting</field>
+        <field name="arch" type="xml">
+            <list create="False" delete="False" >
+                <field name="rad_acct_id" />
+                <field name="acct_session_id" />
+                <field name="acct_unique_id" />
+                <field name="username" />
+                <field name="realm" />
+                <field name="nas_ip_address" />
+                <field name="acct_start_time" />
+                <field name="acct_stop_time" />
+                <field name="acct_session_time" />
+                <field name="acct_terminate_cause" />
+                <field name="service_type" />
+                <field name="framed_ip_address" />
+                <field name="framed_ipv6_address" />
+            </list>
+        </field>
+    </record>
+
+    <!-- View radius.accounting form -->
+    <record id="view_radius_accounting_form" model="ir.ui.view">
+        <field name="name">view.radius.accounting.form</field>
+        <field name="model">radius.accounting</field>
+        <field name="arch" type="xml">
+            <form string="Radius Accounting" create="False" delete="False">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="connect_info_start" />
+                            <field name="connect_info_stop" />
+                            <field name="acct_input_octets" />
+                            <field name="acct_output_octets" />
+                            <field name="called_station_id" />
+                            <field name="calling_station_id" />
+                            <field name="acct_terminate_cause" />
+                            <field name="service_type" />
+                            <field name="framed_protocol" />
+                            <field name="framed_ip_address" />
+                            <field name="framed_ipv6_address" />
+                            <field name="framed_ipv6_prefix" />
+                            <field name="framed_interface_id" />
+                            <field name="delegated_ipv6_prefix" />
+                            <field name="class_" />
+                        </group>
+                        <group>
+                            <field name="rad_acct_id" />
+                            <field name="acct_session_id" />
+                            <field name="acct_unique_id" />
+                            <field name="username" />
+                            <field name="realm" />
+                            <field name="nas_ip_address" />
+                            <field name="nas_port_id" />
+                            <field name="nas_port_type" />
+                            <field name="acct_start_time" />
+                            <field name="acct_update_time" />
+                            <field name="acct_stop_time" />
+                            <field name="acct_session_time" />
+                            <field name="acct_interval" />
+                            <field name="acct_authentic" />
+                        </group>
+
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- View radius.accounting search -->
+    <record id="view_radius_accounting_search" model="ir.ui.view">
+        <field name="name">view.radius.accounting.search</field>
+        <field name="model">radius.accounting</field>
+        <field name="arch" type="xml">
+            <search>
+                <group expand="1" string="Group By">
+                    <filter string="NAS IP" name="nas_ip_address" domain="[]" context="{'group_by':'nas_ip_address'}" />
+                </group>
+                <field name="rad_acct_id" />
+            </search>
+        </field>
+    </record>
+
+    <!-- Action radius.accounting -->
+    <record id="action_radius_accounting" model="ir.actions.act_window">
+        <field name="name">Radius Accounting</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">radius.accounting</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                There is no examples click here to add new Radius Accounting.
+            </p>
+        </field>
+    </record>
+
+    <menuitem name="Rad Acct" id="menu_radacct_list" parent="menu_radius_accounting" action="action_radius_accounting" />
+
+</odoo>

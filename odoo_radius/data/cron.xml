@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data noupdate="1">
+    <record id="ir_cron_cleanup_multiple_sessions" model="ir.cron">
+        <field name="name">Cleanup Multiple RADIUS Sessions</field>
+        <field name="model_id" ref="odoo_radius.model_radius_accounting"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_cleanup_multiple_sessions()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">hours</field>
+<!--        <field name="numbercall">-1</field>-->
+<!--        <field name="active">true</field>-->
+    </record>
+
+    <record id="ir_cron_cleanup_expired_sessions_morning" model="ir.cron">
+    <field name="name">Cleanup Expired Sessions - Morning</field>
+    <field name="model_id" ref="odoo_radius.model_radius_accounting"/>
+    <field name="state">code</field>
+    <field name="code">model._cron_cleanup_expired_sessions()</field>
+    <field name="interval_number">1</field>
+    <field name="interval_type">days</field>
+<!--    <field name="numbercall">-1</field>-->
+<!--    <field name="doall" eval="False"/>-->
+<!--    <field name="active" eval="True"/>-->
+    <field name="nextcall" eval="DateTime.now().replace(hour=6, minute=0, second=0)"/>
+    </record>
+
+    <record id="ir_cron_cleanup_expired_sessions_evening" model="ir.cron">
+    <field name="name">Cleanup Expired Sessions - Evening</field>
+    <field name="model_id" ref="odoo_radius.model_radius_accounting"/>
+    <field name="state">code</field>
+    <field name="code">model._cron_cleanup_expired_sessions()</field>
+    <field name="interval_number">1</field>
+    <field name="interval_type">days</field>
+<!--    <field name="numbercall">-1</field>-->
+<!--    <field name="doall" eval="False"/>-->
+<!--    <field name="active" eval="True"/>-->
+    <field name="nextcall" eval="DateTime.now().replace(hour=18, minute=0, second=0)"/>
+    </record>
+    
+  </data>
+</odoo>

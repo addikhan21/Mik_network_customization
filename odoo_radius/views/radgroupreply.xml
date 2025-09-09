@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <!-- Explicit List View Definition -->
+    <record model="ir.ui.view" id="radgroupreply_list_view">
+      <field name="name">RADIUS Group Reply List</field>
+      <field name="model">radgroupreply</field>
+      <field name="arch" type="xml">
+        <list>
+          <field name="groupname" />
+          <field name="attribute" />
+          <field name="op" />
+          <field name="value" />
+        </list>
+      </field>
+    </record>
+
+    <!-- Form View for RadGroupReply -->
+    <record model="ir.ui.view" id="radgroupreply_form_view">
+      <field name="name">RADIUS Group Reply Form</field>
+      <field name="model">radgroupreply</field>
+      <field name="arch" type="xml">
+        <form string="RADIUS Group Reply">
+          <sheet>
+            <group>
+              <group string="Group Information">
+                <field name="groupname" placeholder="Enter Group Name" />
+               
+              </group>
+
+              <group string="Operator and Value">
+               <div class="d-flex justify-content-between" colspan="2">
+                    <field name="attribute" placeholder="Enter Attribute" />
+                    <field name="op" placeholder="Enter Operator (e.g., :)" />
+                    <field name="value" placeholder="Enter Value" />
+                </div>
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- Action to Open Views -->
+    <record model="ir.actions.act_window" id="radgroupreply_action_window">
+      <field name="name">RADIUS Group Reply</field>
+      <field name="res_model">radgroupreply</field>
+      <field name="view_mode">list,form</field>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+          Click to create a new RADIUS Group Reply record.
+        </p>
+      </field>
+    </record>
+
+    <!-- Menu Items -->
+    <menuitem name="RadGroupReply" id="menu_radgroupreply_list" parent="menu_acct_operation" action="radgroupreply_action_window" />
+  </data>
+</odoo>

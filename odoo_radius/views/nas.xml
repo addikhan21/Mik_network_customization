@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="nas_list_view">
+      <field name="name">NAS List</field>
+      <field name="model">nas</field>
+      <field name="arch" type="xml">
+        <list create="false" edit="flase" delete="false">
+          <field name="nasname" readonly="1" />
+          <field name="shortname" readonly="1" />
+          <field name="type" readonly="1" />
+          <field name="ports" readonly="1" />
+          <field name="secret" readonly="1" />
+          <field name="server" readonly="1" />
+          <field name="community" readonly="1"  />
+          <field name="description" readonly="1" />
+        </list>
+      </field>
+    </record>
+
+    <!-- Form View for NAS -->
+    <record model="ir.ui.view" id="nas_form_view">
+      <field name="name">NAS Form</field>
+      <field name="model">nas</field>
+      <field name="arch" type="xml">
+      <form string="NAS" create="false" edit="flase" delete="false">
+          <sheet>
+    <group>
+        <!-- Network Details -->
+        <group string="Network Information">
+            <field name="nasname" readonly="1"  placeholder="Enter NAS Name (e.g., 12.0.0.1)" />
+            <field name="shortname" readonly="1"  placeholder="Enter Short Name (e.g., Mikrotik)" />
+        </group>
+        <group string="Network Ports">
+            <field name="ports" readonly="1"  placeholder="Enter Port Number (e.g., 3799)" />
+            <field name="type" readonly="1"  placeholder="Choose from: Cisco, Mikrotik, Juniper" />
+        </group>
+
+        <!-- Security Details -->
+        <group string="Security Information">
+            <field name="secret" readonly="1"  placeholder="Enter Secret (e.g., 1122)"/>
+            <field name="server" readonly="1"  placeholder="Enter Server Name or IP" />
+            
+        </group>
+
+        <!-- Description -->
+        <group string="Additional Information" >
+            <field name="community" readonly="1"  placeholder="Enter Community Name (e.g., public)" />
+            <field name="description" readonly="1"  placeholder="Enter an optional description about the NAS" />
+        </group>
+
+    </group>
+
+
+          </sheet>
+          <chatter/>
+        </form>
+      </field>
+    </record>
+
+    <!-- Action to Open Views -->
+    <record model="ir.actions.act_window" id="nas_action_window">
+      <field name="name">NAS</field>
+      <field name="res_model">nas</field>
+      <field name="view_mode">list,form</field>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+          Click to create a new NAS record.
+        </p>
+      </field>
+    </record>
+
+    <!-- Menu Items -->
+
+    <menuitem name="NAS List" id="menu_nas_list" parent="menu_operation_nas" action="nas_action_window"/>
+
+  </data>
+</odoo>

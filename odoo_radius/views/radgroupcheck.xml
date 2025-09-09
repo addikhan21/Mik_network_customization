@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <!-- Explicit List View Definition -->
+    <record model="ir.ui.view" id="radgroupcheck_list_view">
+      <field name="name">RADIUS Group Check List</field>
+      <field name="model">radgroupcheck</field>
+      <field name="arch" type="xml">
+        <list>
+          <field name="groupname" />
+          <field name="attribute" />
+          <field name="op" />
+          <field name="value" />
+        </list>
+      </field>
+    </record>
+
+    <!-- Form View for RadGroupCheck -->
+    <record model="ir.ui.view" id="radgroupcheck_form_view">
+      <field name="name">RADIUS Group Check Form</field>
+      <field name="model">radgroupcheck</field>
+      <field name="arch" type="xml">
+        <form string="RADIUS Group Check">
+          <sheet>
+            <group>
+              <group string="Group Information">
+                <field name="groupname" placeholder="Enter Group Name" />
+              </group>
+
+              <group string="Operator and Value">
+              <div class="d-flex justify-content-between" colspan="2">
+                <field name="attribute" placeholder="Enter Attribute" />
+                <field name="op" placeholder="Enter Operator (e.g., :)" />
+                <field name="value" placeholder="Enter Value" />
+                </div>
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- Action to Open Views -->
+    <record model="ir.actions.act_window" id="radgroupcheck_action_window">
+      <field name="name">RADIUS Group Check</field>
+      <field name="res_model">radgroupcheck</field>
+      <field name="view_mode">list,form</field>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+          Click to create a new RADIUS Group Check record.
+        </p>
+      </field>
+    </record>
+
+    <!-- Menu Items -->
+    <menuitem name="RadGroupCheck" id="menu_radgroupcheck_list" parent="menu_acct_operation" action="radgroupcheck_action_window" />
+  </data>
+</odoo>

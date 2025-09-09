@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_radcheck_user,access_radcheck_user,model_radcheck,base.group_user,1,1,1,1
+access_radgroupcheck_user,access_radgroupcheck_user,model_radgroupcheck,base.group_user,1,1,1,1
+access_radgroupreply_user,access_radgroupreply_user,model_radgroupreply,base.group_user,1,1,1,1
+access_radreply_user,access_radreply_user,model_radreply,base.group_user,1,1,1,1
+access_radusergroup_user,access_radusergroup_user,model_radusergroup,base.group_user,1,1,1,1
+access_radacct_user,access_radacct_user,model_radius_accounting,base.group_user,1,1,1,1
+access_radpostauth_user,access_radpostauth_user,model_radius_postauth,base.group_user,1,1,1,1
+access_nas,nas,model_nas,base.group_user,1,1,1,1
+access_nasreload,nasreload,model_nasreload,base.group_user,1,1,1,1

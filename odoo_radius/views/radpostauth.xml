@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- View radius.postauth Tree -->
+    <record id="view_radius_postauth_tree" model="ir.ui.view">
+        <field name="name">view.radius.postauth.list</field>
+        <field name="model">radius.postauth</field>
+        <field name="arch" type="xml">
+            <list create="False" delete="False" >
+                <field name="id" />
+                <field name="username" />
+                <field name="pass_" />
+                <field name="reply" />
+                <field name="called_station_id" />
+                <field name="calling_station_id" />
+                <field name="authdate" />
+                <field name="class_" />
+            </list>
+        </field>
+    </record>
+
+    <!-- View radius.postauth Form -->
+    <record id="view_radius_postauth_form" model="ir.ui.view">
+        <field name="name">view.radius.postauth.form</field>
+        <field name="model">radius.postauth</field>
+        <field name="arch" type="xml">
+            <form string="Radius Post Authentication" create="False" delete="False">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="username" />
+                            <field name="pass_" />
+                            <field name="reply" />
+                            <field name="called_station_id" />
+                            <field name="calling_station_id" />
+                        </group>
+                        <group>
+                            <field name="authdate" />
+                            <field name="class_" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- View radius.postauth Search -->
+    <record id="view_radius_postauth_search" model="ir.ui.view">
+        <field name="name">view.radius.postauth.search</field>
+        <field name="model">radius.postauth</field>
+        <field name="arch" type="xml">
+            <search>
+                <group expand="1" string="Group By">
+                    <filter string="Username" name="username" domain="[]" context="{'group_by':'username'}" />
+                </group>
+                <field name="username" />
+                <field name="called_station_id" />
+                <field name="calling_station_id" />
+                <field name="authdate" />
+            </search>
+        </field>
+    </record>
+
+    <!-- Action for radius.postauth -->
+    <record id="action_radius_postauth" model="ir.actions.act_window">
+        <field name="name">Radius Post Authentication</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">radius.postauth</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                No post authentication records available. Please check the data source.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu item for radius.postauth -->
+    <menuitem name="RadPostAuth" id="menu_radpostauth_list" parent="menu_radius_accounting" action="action_radius_postauth" />
+
+</odoo>
