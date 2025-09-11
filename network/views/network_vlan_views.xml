@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- View network.vlan View Tree -->
+    <record id="view_network_vlan_tree" model="ir.ui.view">
+        <field name="name">view.network.vlan.list</field>
+        <field name="model">network.vlan</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="complete_name" />
+                <field name="nas_id" />
+            </list>
+        </field>
+    </record>
+
+    <!-- View network.vlan form -->
+    <record id="view_network_vlan_form" model="ir.ui.view">
+        <field name="name">view.network.vlan.form</field>
+        <field name="model">network.vlan</field>
+        <field name="arch" type="xml">
+            <form string="Network Vlan">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" />
+                        <h1>
+                            <field name="name" placeholder="Name..." />
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="nas_id" placeholder="Nas Id ..." />
+                    </group>
+                    <group string="Relation">
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- View network.vlan search -->
+    <record id="view_network_vlan_search" model="ir.ui.view">
+        <field name="name">view.network.vlan.search</field>
+        <field name="model">network.vlan</field>
+        <field name="arch" type="xml">
+            <search>
+                <group expand="1" string="Group By">
+                    <filter string="Name" name="name" domain="[]" context="{'group_by':'name'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action network.vlan -->
+    <record id="action_network_vlan" model="ir.actions.act_window">
+        <field name="name">Network Vlan</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">network.vlan</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                There is no examples click here to add new Network Vlan.
+            </p>
+        </field>
+    </record>
+
+</odoo>
