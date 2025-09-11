@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_res_config_settings_form_inherit" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.remote.service</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+
+                <app data-string="Radius" string="Freeradius Details" name="network" >
+                <!-- add group later groups="nas group" -->
+
+                    <block title="Remote Service" name="users_setting_container">
+                        <setting id="radius_details_nas_settings" icon="fa-check">
+
+                            <group>
+                                <div colspan="2">
+                                    <h6 class="m-0">Radius Service Configuration</h6>
+                                    <p>Configure the details for your Radius server below:</p>
+                                </div>
+                                <field name="remote_radius_ip" />
+                                <field name="remote_radius_user" />
+                                <field name="remote_radius_password" password="True" />
+                                <field name="remote_radius_service_name" />
+                            </group>
+                        </setting>
+
+                        <setting id="radius_details_nas_test_settings" icon="fa-check">
+                            <button name="action_check_radius_status" string="Test Connection" type="object" icon="fa-info-circle"
+                                title="Check Radius Service Status"
+                                class="btn btn-info" />
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_res_config_settings_remote_radius" model="ir.actions.act_window">
+        <field name="name">Remote Service Configuration</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_res_config_settings_form_inherit" />
+        <field name="target">inline</field>
+        <field name="domain">[('module', '=', 'network')]</field>
+    </record>
+
+    <menuitem name="Configurations" id="menu_configuration_network_nas" parent="network_menu_root" />
+    <menuitem name="Settings" id="menu_settings_network_nas" parent="menu_configuration_network_nas"
+        action="action_res_config_settings_remote_radius" />
+
+</odoo>

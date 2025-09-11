@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <!-- Explicit List View Definition -->
+    <record model="ir.ui.view" id="service_group_list_view">
+      <field name="name">Service Group</field>
+      <field name="model">service.group</field>
+      <field name="arch" type="xml">
+        <list>
+          <field name="name" />
+          <field name="duration" />
+        </list>
+      </field>
+    </record>
+
+    <!-- Explicit form View Definition -->
+    <record model="ir.ui.view" id="service_group_form_view">
+      <field name="name">Service Group</field>
+      <field name="model">service.group</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <field name="product_id" invisible="1" />
+            <div name="button_box" position="inside">
+              <button class="oe_stat_button" type="object" name="acction_view_attributes"
+                icon="fa-shield" string="Rules">
+                <field string="Rules" name="atributtes_count" widget="statinfo" />
+              </button>
+              <button name="action_view_product" type="object" class="oe_stat_button" icon="fa-cube" invisible="not product_id">
+                <div class="o_stat_info">
+                  <span class="o_stat_text">Product</span>
+                </div>
+              </button>
+            </div>
+
+            <div class="oe_title">
+              <p>Group Name</p>
+              <h1>
+                <field name="name" placeholder="JUNOS..." readonly="product_id" />
+              </h1>
+            </div>
+            <group>
+              <field name="duration"/>
+            </group>
+            <group>
+              <!-- <field name="nas_id"
+                options="{'no_create': True, 'no_open': True, 'no_create_edit': True}"
+              /> -->
+              <!-- Going For One for Package for multiple Nas -->
+              <field name="nas_ids" widget="many2many_tags"
+                options="{'no_create': True, 'no_open': True, 'no_create_edit': True}"
+              />
+            </group>
+
+            <notebook>
+              <page name="attributes" string="Attributes" invisible="not name">
+                <field name="attributes_ids">
+                  <list>
+                    <field name="group_id" column_invisible="1" />
+                    <field name="attribute" />
+                    <field name="op" />
+                    <field name="value" />
+                    <button name="action_view_record" string="" type="object" icon="fa-list" title="View Details" class="btn-info" />
+                    <button name="unlink" string="" type="object" icon="fa-trash" title="Delete Record" class="btn-warning" />
+                  </list>
+                  <form>
+                    <group string="Operator and Value">
+                      <div class="d-flex justify-content-between" colspan="2">
+                        <field name="attribute" class="form-control border mx-1" placeholder="Enter Attribute  (e.g., Mikrotik-Rate-Limit)" />
+                        <field name="op" class="form-control border mx-1" placeholder="Enter Operator (e.g., :=)" />
+                        <field name="value" class="form-control border mx-1" placeholder="Enter Value (e.g., 100M/100M)" />
+                      </div>
+                    </group>
+                  </form>
+                </field>
+              </page>
+              <!-- <page name="franchises" string="Franchises" invisible="not name">
+                <field name="franchise_user_ids" widget="many2many_tags" options="{'no_create': True, 'no_create_edit': True}" />
+              </page> -->
+            </notebook>
+
+          </sheet>
+        <chatter/>
+        </form>
+      </field>
+    </record>
+
+    <!-- Action to Open Views -->
+    <record model="ir.actions.act_window" id="service_group_action_window">
+      <field name="name">Service Group</field>
+      <field name="res_model">service.group</field>
+      <field name="view_mode">list,form</field>
+      <field name="help" type="html">
+      </field>
+    </record>
+
+
+    <!-- Menu Items -->
+    <menuitem
+      id="service_group_menu_root"
+      name="Service"
+      sequence="-898"
+      web_icon="service_plans,static/description/icon.png" groups="base_security_groups.group_noc"
+    />
+
+    <menuitem name="Groups" id="menu_services_groups_list" parent="service_group_menu_root"
+      action="service_group_action_window" />
+
+  </data>
+</odoo>

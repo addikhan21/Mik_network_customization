@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <!-- Explicit List View Definition -->
+    <record model="ir.ui.view" id="network_list_view">
+      <field name="name">Network Type</field>
+      <field name="model">network.type</field>
+      <field name="arch" type="xml">
+        <list>
+          <field name="type" />
+        </list>
+      </field>
+    </record>
+
+    <!-- Explicit form View Definition -->
+    <record model="ir.ui.view" id="network_form_view">
+      <field name="name">Network Type</field>
+      <field name="model">network.type</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            
+              <div class="oe_title">
+              <p>Network Type</p>
+                <h1>
+                  <field name="type" placeholder="Type..."/>
+                </h1>
+              </div>
+            
+          </sheet>
+            <div class="oe_chatter">
+            <field name="message_follower_ids" groups="base.group_user" />
+            <field name='activity_ids' />
+            <field name="message_ids" />
+          </div>
+        </form>
+      </field>
+    </record>
+
+    <!-- Action to Open Views -->
+    <record model="ir.actions.act_window" id="network_type_action_window">
+      <field name="name">Network Type</field>
+      <field name="res_model">network.type</field>
+      <field name="view_mode">list,form</field>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+          Click to create a new network type record.
+        </p>
+      </field>
+    </record>
+    
+    <!-- Menu Items -->
+    <menuitem name="NAS Type" id="menu_network_type_list" parent="network_menu_root"
+      action="network_type_action_window" />
+
+  </data>
+</odoo>

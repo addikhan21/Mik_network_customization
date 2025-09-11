@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="network_nas_list_view">
+      <field name="name">Network List</field>
+      <field name="model">network.nas</field>
+      <field name="arch" type="xml">
+        <list>
+          <field name="nasname" />
+          <field name="shortname" />
+          <field name="type" />
+          <field name="ports" />
+          <field name="secret" password="True" />
+          <field name="server" optional="hide" />
+          <field name="community" optional="hide" />
+          <field name="description" optional="hide" />
+        </list>
+      </field>
+    </record>
+
+    <!-- Form View for NAS -->
+    <record model="ir.ui.view" id="network_nas_form_view">
+      <field name="name">Network Form</field>
+      <field name="model">network.nas</field>
+      <field name="arch" type="xml">
+        <form string="NAS">
+          <header>
+            <button name="action_radius_start" string="Start" type="object"
+              icon="fa-play"
+              title="Start Radius Service"
+              class="btn btn-success"/>
+            <button name="action_radius_restart" string="Restart" type="object"
+              icon="fa-refresh"
+              title="Restart Radius Service"
+              class="btn btn-warning" />
+            <button name="action_check_radius_status" string="Status" type="object"
+              icon="fa-question"
+              title="Check Radius Service Status"
+              class="btn btn-info" />
+            <button name="action_radius_stop" string="Stop" type="object"
+              icon="fa-times"
+              title="Stop Radius Service"
+              class="btn btn-danger" />
+            <button string="Vlans" name="generate_nas_vlans" icon="fa-angle-double-up" type="object" class="oe_highlight" />
+            <button name="action_fill_graph" type="object" string="Fill Cacti Graph IDs" class="btn-primary" invisible="1" />
+
+          </header>
+          <sheet>
+            <div name="button_box" position="inside">
+              <field string="Master Record"
+                name="master_record_status" invisible="1"
+              />
+              <button class="oe_stat_button" type="object" name="get_users"
+                icon="fa-users" string="Users">
+                <field string="Users" name="user_count" widget="statinfo" />
+              </button>
+              <button class="oe_stat_button btn-danger" type="object" name="get_master_record"
+                title="Master Record not Found!" invisible="master_record_status == 'linked'">
+                <field string="Users" name="master_record_status" />
+              </button>
+
+              <button class="oe_stat_button btn-success" type="object" name="get_master_record"
+                title="Master Record Linked" invisible="master_record_status == 'unlinked'">
+                <field string="Users" name="master_record_status" />
+              </button>
+              <button class="oe_stat_button" type="object" name="get_vlans_"
+                title="Vlans" invisible="not vlans_count" icon="fa-angle-double-up">
+                <field string="Vlans" name="vlans_count" widget="statinfo"/>
+              </button>
+
+            </div>
+            <group>
+              <!-- Network Details -->
+              <group string="Network Information">
+                <field name="nasname" placeholder="Enter NAS IP Address (e.g., 0.0.0.0)" />
+                <field name="shortname" placeholder="Enter Short Name (e.g., Mikrotik)" />
+                <field name="ports" placeholder="Enter Port Number (e.g., 3799)" />
+              </group>
+              <group string="Network Ports">
+                <field name="show_secret_toggle" invisible="1" />
+                <div class="d-flex" colspan="2">
+                  <group class="p-0">
+                    <field name="secret" placeholder="Enter Secret (e.g., 1122)" password="True"
+                      invisible="show_secret_toggle" />
+                    <field name="secret" placeholder="Enter Secret (e.g., 1122)"
+                      invisible="not show_secret_toggle" />
+                  </group>
+                  <group class="p-0">
+                    <div class="mx-5">
+                      <button name="toggle_show_secret" type="object" string="" icon="fa-eye-slash"
+                        title="Hide Secret" invisible="not show_secret_toggle"
+                        class="btn btn-secondary" />
+                      <button name="toggle_show_secret" type="object" string="" icon="fa-eye"
+                        title="View Secret" invisible="show_secret_toggle" class="btn btn-secondary" />
+                    </div>
+                  </group>
+                </div>
+
+                <field name="type"
+                  options="{'no_open': True, 'no_create' : True, 'no_create_edit' : True}"
+                  placeholder="Choose from: Cisco, Mikrotik, Juniper" />
+                <field name="server" placeholder="Enter Server Name or IP" />
+              </group>
+
+              <!-- Description -->
+              <group string="Additional Information" colspan="4">
+                <field name="community" placeholder="Enter Community Name (e.g., public)" />
+                <field name="description" placeholder="Enter an optional description about the NAS" />
+                <field name="nas_master_id" readonly="1" invisible="1" />
+              </group>
+
+            </group>
+
+            <notebook>
+              <page name="nas_details" string="NAS Details">
+                <sheet>
+                  <group>
+                    <group string="General Information">
+                      <field name="architecture_name" />
+                      <field name="board_name" />
+                      <field name="platform" />
+                      <field name="version" />
+                    </group>
+                    <group string="Build &amp; System Info">
+                      <!-- <field name="build_time" /> -->
+                        <field name="nas_build_time" />
+                      <field name="uptime" />
+                      <field name="cpu" />
+                      <field name="cpu_count" />
+                      <!-- <field name="cpu_frequency" /> -->
+                      <field name="cpu_frequency_mhz" />
+                      <field name="cpu_load" />
+                    </group>
+                  </group>
+                  <group>
+                    <!-- <group string="Memory &amp; Storage">
+                      <field name="free_memory" string="Free Memory (GiB)" />
+                      <field name="total_memory" string="Total Memory (GiB)" />
+                      <field name="free_hdd_space" string="Free HDD Space (GiB)" />
+                      <field name="total_hdd_space"  string="Total HDD Space (GB)" />
+                    </group> -->
+                    <group string="Memory &amp; Storage">
+                      <field name="free_memory_Gib" string="Free Memory (GiB)" />
+                      <field name="total_memory_Gib" string="Total Memory (GiB)" />
+                      <field name="free_hdd_space_Gib" string="Free HDD Space (GiB)" />
+                      <field name="total_hdd_space_Gib"  string="Total HDD Space (GB)" />
+                    </group>
+                  </group>
+                </sheet>
+              </page>
+              <page name="service_status" string="Service Status">
+
+                <field name="service_status" />
+                <button name="action_clear_status" type="object" string="Clear" icon="fa-cogs"
+                  title="Clear Service Status" invisible="not service_status" class="btn btn-link" />
+              </page>
+              <page name="franchises" string="Franchises">
+                <field name="franchise_user_ids" widget="many2many_tags"/>
+              </page>
+
+              <page string="NAS Api Configuration" groups="base.group_system">
+                <header>
+                  <button name="get_nas_data" string="Fetch Nas Data" type="object"
+                    icon="fa-refresh"
+                    title="Fetch Nas Data"
+                    class="btn btn-primary" />
+                </header>
+                <group>
+                  <field name="nas_ip" placeholder="NAS IP" />
+                  <field name="nas_api_username" placeholder="Enter API Username" />
+                  <field name="nas_api_password" placeholder="Enter API Password" password="True" />
+
+                </group>
+              </page>
+            </notebook>
+
+
+          </sheet>
+          <!-- <div class="oe_chatter">
+            <field name="message_follower_ids" groups="base.group_user" />
+            <field name='activity_ids' />
+            <field name="message_ids" />
+          </div> -->
+        </form>
+      </field>
+    </record>
+
+    <!-- Action to Open Views -->
+    <record model="ir.actions.act_window" id="network_nas_action_window">
+      <field name="name">NAS</field>
+      <field name="res_model">network.nas</field>
+      <field name="view_mode">list,form</field>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+          Click to create a new NAS record.
+        </p>
+      </field>
+    </record>
+
+    <!-- Menu Items -->
+    <menuitem id="network_menu_root" name="Network"
+      web_icon="network,static/description/icon.png" 
+      groups="base_security_groups.group_noc" sequence="-899"
+      />
+
+    <menuitem name="NAS" id="menu_network_nas_list" parent="network_menu_root"
+      action="network_nas_action_window" />
+
+
+  </data>
+</odoo>

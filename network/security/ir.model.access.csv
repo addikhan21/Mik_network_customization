@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_network_type_manager,network_type_manager,model_network_type,base.group_user,1,1,1,1
+access_network_nas_manager,network_nas_manager,model_network_nas,base.group_user,1,1,1,1
+access_network_vlan_manager,network_vlan_manager,model_network_vlan,base.group_user,1,1,1,1

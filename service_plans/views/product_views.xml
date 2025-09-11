@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="product_normal_form_view_inherit_service_group" model="ir.ui.view">
+        <field name="name">product.product.form.inherit.service.group</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                    <page string="Service Group" name="service_group_page">
+                    <group>
+                        <field name="service_group_id" readonly="1" />
+                    </group>   
+                  </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
