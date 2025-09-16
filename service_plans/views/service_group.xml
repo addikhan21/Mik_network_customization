@@ -90,8 +90,6 @@
       <field name="name">Service Group</field>
       <field name="res_model">service.group</field>
       <field name="view_mode">list,form</field>
-      <field name="help" type="html">
-      </field>
     </record>
 
 
