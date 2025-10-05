@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="crm_lead_view_form_inherit" model="ir.ui.view">
+        <field name="name">crm.lead.form.inherit</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='opportunity_partner']" position="inside">
+                <field name="data_package_id" invisible="type == 'lead'"/>
+                <field name="hardware_required" invisible="type == 'lead'"/>
+            </xpath>
+            <xpath expr="//label[@for='street']" position="attributes">
+                <attribute name="string">Service Address</attribute>
+            </xpath>
+            <xpath expr="//field[@name='city']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='state_id']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='zip']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='country_id']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+            <xpath expr="//page[@name='internal_notes']" position="before">
+                <page string="Isp Configuration" name="isp_configuration" invisible="hardware_required != True">
+                    <group>
+                        <group>
+                            <field name="is_network_equipment" invisible="type == 'lead'"/>
+                            <!-- Add your ISP configuration fields here -->
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

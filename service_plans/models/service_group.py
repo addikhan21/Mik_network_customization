@@ -42,7 +42,7 @@ class ServiceGroup(models.Model):
             'target': 'new',
         }
 
-    @api.model_create_multi
+
     def create(self, vals_list):
         """
         Create a new service group.
@@ -51,16 +51,16 @@ class ServiceGroup(models.Model):
         and type 'service', and links the created product to the service group.
         """
         service_group = super(ServiceGroup, self).create(vals_list)
-
+        if 'product_id' not in vals_list:
         # Create a product with the same name
-        product = self.env['product.product'].create({
-            'name': service_group.name,
-            'type': 'service',
-            'sale_ok': True,
-            'purchase_ok': False,
-            'service_group_id': service_group.id,
-        })
-        service_group.product_id = product.id
+            product = self.env['product.product'].create({
+                'name': service_group.name,
+                'type': 'service',
+                'sale_ok': True,
+                'purchase_ok': False,
+                'service_group_id': service_group.id,
+            })
+            service_group.product_id = product.id
         return service_group
 
     def unlink(self):
