@@ -26,12 +26,19 @@
             </xpath>
             <xpath expr="//page[@name='internal_notes']" position="before">
                 <page string="Isp Configuration" name="isp_configuration" invisible="hardware_required != True">
-                    <group>
-                        <group>
-                            <field name="is_network_equipment" invisible="type == 'lead'"/>
-                            <!-- Add your ISP configuration fields here -->
-                        </group>
-                    </group>
+                    <field
+                            name="is_network_equipment_ids"
+                            widget="sol_o2m"
+                            mode="list"
+                            readonly="type == 'lead'">
+                        <list editable="bottom">
+                            <field name="name"/>
+                            <field name="type"/>
+                        </list>
+
+                    </field>
+                    <!-- Add your ISP configuration fields here -->
+
                 </page>
             </xpath>
 

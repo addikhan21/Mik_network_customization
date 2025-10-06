@@ -14,8 +14,9 @@ class CrmLead(models.Model):
         domain=[('is_data_package', '=', True),('is_data_package_configured', '=', True)]
     )
 
-    is_network_equipment = fields.Many2one(
+    is_network_equipment_ids = fields.One2many(
         'product.template',
+        'opportunity_id',
         string='Is Network Equipment',
         required=True,
         domain=[('is_isp_configured', '=', True)]

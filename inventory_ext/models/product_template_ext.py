@@ -7,7 +7,7 @@ class ProductTemplateEXT(models.Model):
     is_data_package = fields.Boolean(string='Is Data Package',)
     is_data_package_configured = fields.Boolean(string='Is Data Package Configured', default=False)
     is_isp_configured = fields.Boolean('Is Isp Configured', default=True, compute='_compute_is_isp_configured', store=True, readonly=False)
-
+    opportunity_id = fields.Many2one('crm.lead', string='Opportunity')
     def _compute_is_isp_configured(self):
         pass
 
