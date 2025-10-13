@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="seq_customer_uid" model="ir.sequence">
+        <field name="name">Customer UID Sequence</field>
+        <field name="code">crm.customer.uid</field>
+        <field name="prefix">CUS-</field>
+        <field name="padding">6</field>
+        <field name="implementation">standard</field>
+    </record>
+    <!-- reference for env.ref in code -->
+    <record id="seq_customer_uid_ref" model="ir.model.data">
+        <field name="name">seq_customer_uid</field>
+        <field name="module">crm_customer_location</field>
+        <field name="model">ir.sequence</field>
+        <field name="res_id" eval="ref('seq_customer_uid')"/>
+    </record>
+    <!-- Resource: stock.warehouse -->
+    <data noupdate="1">
+        <record id="internal_storage" model="stock.location">
+            <field name="name">Internal Storage</field>
+            <field name="usage">view</field>
+        </record>
+    </data>
+</odoo>

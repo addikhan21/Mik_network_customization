@@ -5,15 +5,15 @@
         <field name="model">product.template</field>
         <field name="inherit_id" ref="hr_expense.view_product_hr_expense_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//label[@for='can_be_expensed']" position="after">
-                <div>
-                    <field name="is_isp_configured" invisible="is_data_package_configured == True"/>
-                    <label for="is_isp_configured" invisible="is_data_package_configured == True"/>
-                    <field name="is_data_package"/>
-                    <label for="is_data_package"/>
-                    <field name="is_data_package_configured" invisible="is_data_package_configured == True"/>
-                    <label for="is_data_package_configured" invisible="is_data_package_configured == True"/>
-                </div>
+            <xpath expr="//page[@name='inventory']" position="after">
+                <page name="isp_equipment" string="Isp Equipment">
+                    <group>
+                        <field name="is_isp_service"/>
+                        <field name="is_isp_equipment"/>
+                        <field name="is_data_package_configured" invisible="1"/>
+                    </group>
+
+                </page>
             </xpath>
         </field>
     </record>
