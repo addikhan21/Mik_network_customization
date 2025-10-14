@@ -8,7 +8,6 @@
             <xpath expr="//page[@name='sales_purchases']/group" position="inside">
                 <group name="contacts_internal_location" string="Customer Storage">
                     <field name="x_customer_uid" readonly="1"/>
-                    <field name="parent_storage_location_id"/>
                     <field name="internal_location_id"/>
                 </group>
             </xpath>

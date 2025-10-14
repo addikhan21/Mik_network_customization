@@ -17,29 +17,21 @@ class ResPartnerExt(models.Model):
         partner.
         Returns child_internal_location record.
         """
-
+        parent_storage = self.env.ref('crm_ext.internal_storage')
         StockLocation = self.env['stock.location']
         # Determine name and codes
         partner_uid_value = uid_value
-        parent_name = f'Customer Storage - {partner_uid_value}'
-        child_name = f'Customer Internal Location - {partner_uid_value}'
-        parent_ref_code = f'cust_storage_{uid_value}'
-        child_ref_code = f'cust_internal_{uid_value}'
-        # Create parent view location
-        parent_vals = {
-            'name': parent_name,
-            'usage': 'view',
-        }
-        parent = StockLocation.create(parent_vals)
-        # Create child internal location under parent
+        child_name = f'{partner_uid_value}'
+
+
         child_vals = {
             'name': child_name,
             'usage': 'internal',
+            'location_id': parent_storage.id,
         }
         child = StockLocation.create(child_vals)
         # Link on partner
         partner.write({
             'internal_location_id': child.id,
-            'parent_storage_location_id': parent.id,
         })
         return child

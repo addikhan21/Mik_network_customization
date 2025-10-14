@@ -9,6 +9,10 @@
                 <field name="data_package_id" invisible="type == 'lead'"/>
                 <field name="hardware_required" invisible="type == 'lead'"/>
             </xpath>
+             <xpath expr="//field[@name='tag_ids']" position="after">
+                <field name="otc" invisible="type == 'lead'"/>
+                <field name="service_charges" invisible="type == 'lead'"/>
+            </xpath>
             <xpath expr="//label[@for='street']" position="attributes">
                 <attribute name="string">Service Address</attribute>
             </xpath>

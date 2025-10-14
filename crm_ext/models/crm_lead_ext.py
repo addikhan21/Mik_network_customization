@@ -7,6 +7,8 @@ class CrmLead(models.Model):
 
     phone = fields.Char(string='Phone Number', required=True)
     contact_name = fields.Char(string='Full Name', required=True)
+    otc = fields.Char(string='OTC',)
+    service_charges= fields.Char(string='Service Charges')
     hardware_required = fields.Boolean(string='Is Hardware Required')
     data_package_id = fields.Many2one(
         'product.product',
@@ -64,9 +66,44 @@ class CrmLead(models.Model):
             self.message_post(
                 body=_('Internal locations created for contact %s (UID: %s)') % (partner.display_name, uid_value))
 
+        if self.otc or self.service_charges:
+            self._create_sale_order_with_charges()
+
         # Call parent method to handle won logic and rainbowman
         return super(CrmLead, self).action_set_won_rainbowman()
 
+    def _create_sale_order_with_charges(self):
+        """Create sale order with OTC and Service Charges products"""
+        order_lines = []
+        if self.otc:
+            otc_product = self.env.ref('crm_ext.otc')
+            order_lines.append((0, 0, {
+                'product_id': otc_product.product_variant_id.id,
+                'price_unit': float(self.otc),
+            }))
+
+        if self.service_charges:
+            service_product = self.env.ref('crm_ext.service_charges')
+            order_lines.append((0, 0, {
+                'product_id': service_product.product_variant_id.id,
+                'price_unit': float(self.service_charges),
+            }))
+        sale_order = self.env['sale.order'].create({
+            'partner_id': self.partner_id.id,
+            'opportunity_id': self.id,
+        })
+
+
+        sale_order.write({'order_line': order_lines})
+
+        sale_order.action_confirm()
+
+        if sale_order.state == 'sale':
+            sale_order._create_invoices()
+
+
+        self.message_post(
+            body=_('Sale order %s created with charges') % sale_order.name)
 
 class EquipmentLineExt(models.Model):
     _name = 'equipment.line'

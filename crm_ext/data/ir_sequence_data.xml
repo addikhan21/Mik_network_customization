@@ -21,4 +21,12 @@
             <field name="usage">view</field>
         </record>
     </data>
+    <data noupdate="1">
+        <record id="otc" model="product.template">
+            <field name="name">OTC</field>
+        </record>
+        <record id="service_charges" model="product.template">
+            <field name="name">Service Charges</field>
+        </record>
+    </data>
 </odoo>
