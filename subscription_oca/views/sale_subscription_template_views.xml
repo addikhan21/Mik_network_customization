@@ -126,7 +126,7 @@
     <menuitem
         id="sale_template_subscription_menu"
         parent="sale_subscription_configuration_menu"
-        action="subscription_oca.sale_subscription_template_act_window"
+        action="sale_subscription_template_act_window"
         sequence="2"
     />
 </odoo>

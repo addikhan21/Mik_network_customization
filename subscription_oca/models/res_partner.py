@@ -16,6 +16,8 @@ class Partner(models.Model):
         compute="_compute_subscription_count",
     )
 
+    available_peppol_eas = fields.Char()
+
     def _compute_subscription_count(self):
         for record in self:
             record.subscription_count = len(record.subscription_ids)
@@ -26,7 +28,7 @@ class Partner(models.Model):
             "res_model": "sale.subscription",
             "domain": [("id", "in", self.subscription_ids.ids)],
             "name": self.name,
-            "view_mode": "tree,form",
+            "view_mode": "list,form",
             "context": {
                 "default_partner_id": self.id,
             },
