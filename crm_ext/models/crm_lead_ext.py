@@ -48,10 +48,7 @@ class CrmLead(models.Model):
         if not self.data_package_id:
             raise ValidationError(_('Hardware equipment is required but not specified.'))
 
-        if self.hardware_required and not self.is_hard_equipment_ids:
-            raise ValidationError(_('Hardware equipment is required but not specified.'))
-
-        # Generate customer UID if not exists
+            # Generate customer UID if not exists
         if not partner.x_customer_uid:
             uid_value = self._generate_customer_uid()
             partner.sudo().write({'x_customer_uid': uid_value})
@@ -65,6 +62,12 @@ class CrmLead(models.Model):
             partner.sudo()._create_customer_locations(partner, uid_value)
             self.message_post(
                 body=_('Internal locations created for contact %s (UID: %s)') % (partner.display_name, uid_value))
+
+        if self.hardware_required and not self.is_hard_equipment_ids:
+            raise ValidationError(_('Hardware equipment is required but not specified.'))
+        elif self.hardware_required and self.is_hard_equipment_ids:
+            self._create_delivery_order(self.is_hard_equipment_ids)
+
 
         if self.otc or self.service_charges:
             self._create_sale_order_with_charges()
@@ -104,6 +107,41 @@ class CrmLead(models.Model):
 
         self.message_post(
             body=_('Sale order %s created with charges') % sale_order.name)
+
+    def _create_delivery_order(self, equipment_lines):
+        """Create delivery order for hardware equipment"""
+        if not equipment_lines:
+            return
+        
+        # Check if delivery order already exists for this lead
+        existing_delivery = self.env['stock.picking'].search([
+            ('opportunity_id', '=', self.id),
+            ('state', '!=', 'cancel')
+        ])
+        if existing_delivery:
+            return
+
+        delivery_order = self.env['stock.picking'].create({
+            'partner_id': self.partner_id.id,
+            'picking_type_id': self.env.ref('stock.picking_type_out').id,
+            'location_id': self.partner_id.internal_location_id.id,
+            'opportunity_id': self.id
+        })
+
+        for equipment in equipment_lines:
+            self.env['stock.move'].create({
+                'name': equipment.product_id.name,
+                'product_id': equipment.product_id.id,
+                'product_uom_qty': equipment.quantity,
+                'product_uom': equipment.product_id.uom_id.id,
+                'picking_id': delivery_order.id,
+                'location_id': delivery_order.location_id.id,
+            })
+        delivery_order.action_confirm()
+
+        self.message_post(body=_('Delivery order %s created for hardware equipment') % delivery_order.name)
+
+
 
 class EquipmentLineExt(models.Model):
     _name = 'equipment.line'
