@@ -13,7 +13,6 @@ class CrmLead(models.Model):
     data_package_id = fields.Many2one(
         'product.product',
         string='Data Package',
-        required=True,
         domain=[('is_isp_service', '=', True)]
     )
 
@@ -47,6 +46,8 @@ class CrmLead(models.Model):
 
         if not self.data_package_id:
             raise ValidationError(_('Hardware equipment is required but not specified.'))
+        else:
+            self._create_subscription_and_order()
 
             # Generate customer UID if not exists
         if not partner.x_customer_uid:
@@ -140,6 +141,30 @@ class CrmLead(models.Model):
         delivery_order.action_confirm()
 
         self.message_post(body=_('Delivery order %s created for hardware equipment') % delivery_order.name)
+
+    def _create_subscription_and_order(self):
+        order_lines = []
+        if self.data_package_id:
+            order_lines.append((0, 0, {
+                'product_id': self.data_package_id.id,
+            }))
+        sale_order = self.env['sale.order'].create({
+            'partner_id': self.partner_id.id,
+            'opportunity_id': self.id,
+        })
+
+        sale_order.write({'order_line': order_lines})
+
+        sale_order.action_confirm()
+        if sale_order.state == 'sale':
+            subscription = self.env['sale.subscription'].create({
+                'partner_id': self.partner_id.id,
+                'template_id': self.env['sale.subscription.template'].search([('name', '=', 'subscription_oca')]).id,
+                'pricelist_id': self.env['product.pricelist'].search([('id', '=', 1)]).id,
+                'opportunity_id':self.id,
+                'sale_order_id': sale_order.id,
+            })
+            # sale_order.subscription_id = subscription.id
 
 
 

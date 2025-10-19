@@ -103,6 +103,7 @@ class SaleSubscription(models.Model):
         store=True,
         ondelete="restrict",
     )
+    opportunity_id = fields.Many2one('crm.lead', string='Opportunity', readonly=True)
 
     @api.model
     def _read_group_stage_ids(self, stages, domain, order):
