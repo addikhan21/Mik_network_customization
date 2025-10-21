@@ -14,14 +14,14 @@ class IpAddress(models.Model):
         ('ipv4', 'IPv4'),
         ('ipv6', 'IPv6')
     ], string='IP Type', compute='_compute_ip_type', store=True)
-    user_id = fields.Many2one('res.users', string='Assigned User')
-    subscription_id = fields.Many2one('sale.subscription', string='Subscription')
+    subscription_id = fields.Many2one('sale.subscription', string='Subscription',readonly=True)
+    subscription_state = fields.Many2one(string='Subscription States', related='subscription_id.stage_id', readonly=True,store=True)
 
     @api.depends('ip_address')
     def _compute_ip_type(self):
         ipv4_pattern = r'^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
         ipv6_pattern = r'^(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$|^::1$|^::$'
-        
+
         for record in self:
             if record.ip_address:
                 if re.match(ipv4_pattern, record.ip_address):

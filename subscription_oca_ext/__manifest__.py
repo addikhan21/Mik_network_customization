@@ -2,7 +2,7 @@
     'name': 'Subscription IP Management Extension',
     'version': '18.0',
     'category': 'Subscription',
-    'depends': ['sale_subscription'],
+    'depends': ['subscription_oca'],
     'data': [
         'security/ir.model.access.csv',
         'views/ip_address_views.xml',

@@ -7,7 +7,6 @@
             <list>
                 <field name="ip_address"/>
                 <field name="ip_type"/>
-                <field name="user_id"/>
                 <field name="subscription_id"/>
             </list>
         </field>
@@ -22,7 +21,6 @@
                     <group>
                         <field name="ip_address"/>
                         <field name="ip_type" readonly="1"/>
-                        <field name="user_id"/>
                         <field name="subscription_id"/>
                     </group>
                 </sheet>
