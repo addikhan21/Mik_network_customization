@@ -5,6 +5,7 @@ from odoo.exceptions import ValidationError
 class IpAddress(models.Model):
     _name = 'ip.address'
     _description = 'IP Address Management'
+    _rec_name = 'ip_address'
     _sql_constraints = [
         ('unique_ip', 'UNIQUE(ip_address)', 'IP address must be unique!')
     ]
@@ -33,7 +34,7 @@ class IpAddress(models.Model):
     def _check_ip_format(self):
         ipv4_pattern = r'^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
         ipv6_pattern = r'^(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$|^::1$|^::$'
-        
+
         for record in self:
             if record.ip_address:
                 if not (re.match(ipv4_pattern, record.ip_address) or re.match(ipv6_pattern, record.ip_address)):

@@ -8,6 +8,7 @@
                 <field name="ip_address"/>
                 <field name="ip_type"/>
                 <field name="subscription_id"/>
+                <field name="subscription_state"/>
             </list>
         </field>
     </record>
@@ -22,6 +23,7 @@
                         <field name="ip_address"/>
                         <field name="ip_type" readonly="1"/>
                         <field name="subscription_id"/>
+                        <field name="subscription_state"/>
                     </group>
                 </sheet>
             </form>
