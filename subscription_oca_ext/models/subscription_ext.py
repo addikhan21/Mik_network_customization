@@ -1,4 +1,6 @@
 from odoo import models, fields,api
+from odoo_18_src.odoo.odoo.tests import users
+
 
 class SaleSubscription(models.Model):
     _inherit = 'sale.subscription'
@@ -17,3 +19,16 @@ class SaleSubscription(models.Model):
                 record.ip_address_id.write({'subscription_id': record.id})
                 print("IP Address ID:", record.ip_address_id.id)
                 print("Subscription ID:", record.id)
+            else:
+                record.value_set = False
+
+    @api.depends('stage_id')
+    def onchange_ip_address_id(self):
+        for record in self:
+            if record.ip_address_id:
+                users = self.env['users'].create({
+                    'name': record.partner_id.x_customer_uid,
+                    'ip_address': record.ip_address_id.ip_address,
+                    'subscription_id': record.id,
+
+                })

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_distributor_form_inherit" model="ir.ui.view">
+        <field name="name">distributors.form.inherit</field>
+        <field name="model">distributors</field>
+        <field name="inherit_id" ref="distributors.view_distributors_form" />
+        <field name="arch" type="xml">
+            <div class="oe_button_box" position="inside">
+                <button name="action_view_users"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-users">
+                    <field name="user_count" widget="statinfo" string="Users" />
+                </button>
+
+            </div>
+
+            <xpath expr="//button[@name='action_view_user']" position="after">
+            <button name="action_view_admin_secret"
+                type="object"
+                class="oe_stat_button"
+                icon="fa-eye">
+                <field name="name" widget="statinfo" string="Admin" />
+            </button>
+        </xpath>
+
+        </field>
+    </record>
+
+
+    <record id="view_distributors_tree_inherit" model="ir.ui.view">
+        <field name="name">distributors.tree.inherit</field>
+        <field name="model">distributors</field>
+        <field name="inherit_id" ref="distributors.view_distributors_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='contact_number']" position="after">
+                <field name="user_count" />
+                <!-- <field name="online_users" /> -->
+            </xpath>
+        </field>
+    </record>
+</odoo>

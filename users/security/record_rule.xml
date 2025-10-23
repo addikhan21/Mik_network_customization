@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Rule for Distributors to see only their own records -->
+        <record id="distributor_own_user_records_rule" model="ir.rule">
+            <field name="name">Distributor Own Users Records Only</field>
+            <field name="model_id" ref="model_users"/>
+<!--            <field name="domain_force">[-->
+<!--                ('distributor_id', '=', user.distributor_id.id),-->
+<!--                ]</field>-->
+            <field name="groups" eval="[(4, ref('base_security_groups.group_distributor'))]"/>
+            <!-- <field name="perm_read" eval="True"/> -->
+            <!-- <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/> -->
+        </record>
+
+        <record id="distributor_not_own_user_records_rule" model="ir.rule">
+            <field name="name">Distributor Not Own Users Records Only</field>
+            <field name="model_id" ref="model_users"/>
+<!--            <field name="domain_force">['|',('master_dealer_id', '=', user.distributor_id.id),-->
+<!--                ('dealer_id', '=', user.distributor_id.id)]</field>-->
+            <field name="groups" eval="[(4, ref('base_security_groups.group_distributor'))]"/>
+            <field name="perm_read" eval="True"/>
+            <!-- <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/> -->
+        </record>
+
+        <!-- Rule for Admin to see all records -->
+        <record id="distributor_admin_users_records_rule" model="ir.rule">
+            <field name="name">Admin All Users Records</field>
+            <field name="model_id" ref="model_users"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('base_security_groups.group_admin'))]"/>
+        </record>
+    </data>
+</odoo>

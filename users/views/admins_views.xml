@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="admins_tree_view_inherit" model="ir.ui.view">
+        <field name="name">admins.tree.view.inherit</field>
+        <field name="model">admins</field>
+        <field name="inherit_id" ref="distributors.admins_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list" position="inside">
+                <field name="user_count"/>
+                <field name="total_users"/>
+                <field name="expired_count"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_admins_form_inherit" model="ir.ui.view">
+        <field name="name">amdins.form.inherit</field>
+        <field name="model">admins</field>
+        <field name="inherit_id" ref="distributors.admins_form_view"/>
+        <field name="arch" type="xml">
+            <div class="oe_button_box" position="inside">
+                <button name="action_view_users"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-users">
+                    <field name="user_count" widget="statinfo" string="Users"/>
+                </button>
+            </div>
+
+            <xpath expr="//div[@name='stats_cards']" position="inside">
+
+                <div class="card-body m-2 rounded-3 border border-secondary bg-light"
+                     onmouseover="this.classList.add('shadow-sm')"
+                     onmouseout="this.classList.remove('shadow-sm')"
+                >
+                    <a name="action_view_new_users" type="object"
+                       style="text-decoration: none; color: inherit;">
+                        <div class="d-flex justify-content-between text-wrap">
+                            <h5 class="card-title text-muted">New Users</h5>
+                            <i class="fa fa-star pb-1 text-info"
+                               title="New Users"/>
+                        </div>
+                        <h2 class="card-subtitle" name="total_users" style="margin: 0; padding: 0;">
+                            <field name="new_users_count" readonly="1"
+                                   style="border: none !important"/>
+
+                        </h2>
+                    </a>
+                </div>
+
+                <div class="card-body m-2 rounded-3 border border-secondary bg-light"
+                     onmouseover="this.classList.add('shadow-sm')"
+                     onmouseout="this.classList.remove('shadow-sm')"
+                     invisible="distributor_type == 'sub_dealer'">
+                    <a name="action_view_total_users" type="object"
+                       style="text-decoration: none; color: inherit;">
+                        <div class="d-flex justify-content-between text-wrap">
+                            <h5 class="card-title text-muted">Total Users</h5>
+                            <i class="fa fa-users pb-1 text-info"
+                               title="Total Users"/>
+                        </div>
+                        <h2 class="card-subtitle" name="total_users" style="margin: 0; padding: 0;">
+                            <field name="total_users" readonly="1"
+                                   style="border: none !important"/>
+
+                        </h2>
+                    </a>
+                </div>
+
+                <div class="card-body m-2 rounded-3 border border-secondary bg-light"
+                     onmouseover="this.classList.add('shadow-sm')"
+                     onmouseout="this.classList.remove('shadow-sm')">
+                    <a name="action_view_expiring_soon_users" type="object"
+                       style="text-decoration: none; color: inherit;">
+                        <div class="d-flex justify-content-between text-wrap">
+                            <h5 class="card-title text-muted">Expires Soon</h5>
+                            <i class="fa  fa-hourglass-end pb-1  text-info"
+                               title="Expiring Users"/>
+                        </div>
+                        <h2 class="card-subtitle" name="total_users" style="margin: 0; padding: 0;">
+                            <field name="expires_soon_count" readonly="1"
+                                   style="border: none !important"/>
+
+                        </h2>
+                    </a>
+                </div>
+
+                <div class="card-body m-2 rounded-3 border border-secondary bg-light"
+                     onmouseover="this.classList.add('shadow-sm')"
+                     onmouseout="this.classList.remove('shadow-sm')">
+                    <a name="action_view_expired_users" type="object"
+                       style="text-decoration: none; color: inherit;">
+                        <div class="d-flex justify-content-between text-wrap">
+                            <h5 class="card-title text-muted">Expired Users</h5>
+                            <i class="fa  fa-ban pb-1  text-info"
+                               title="Expired Users"/>
+                        </div>
+                        <h2 class="card-subtitle" name="total_users" style="margin: 0; padding: 0;">
+                            <field name="expired_count" readonly="1"
+                                   style="border: none !important"/>
+
+                        </h2>
+                    </a>
+                </div>
+
+            </xpath>
+
+
+        </field>
+    </record>
+</odoo>
