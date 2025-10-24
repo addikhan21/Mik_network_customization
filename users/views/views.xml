@@ -644,7 +644,7 @@
                         </group>
                         <group name="address" colspan="4">
                             <group colspan="2">
-                                <field name="address" required="1" />
+                                <field name="address"/>
                             </group>
                         </group>
                     </group>
