@@ -1,6 +1,5 @@
 from odoo import models, fields,api
 from odoo.exceptions import AccessError, UserError, ValidationError
-import uuid
 
 
 class SaleSubscription(models.Model):
@@ -8,40 +7,40 @@ class SaleSubscription(models.Model):
 
     ip_address_id = fields.Many2one('ip.address',  string='IP Address',domain="[('subscription_id', '=', False)]",)
     opportunity_id = fields.Many2one('crm.lead', string='Opportunity', readonly=True)
-    value_set = fields.Char(compute='onchange_ip_address_id')
+    value_set = fields.Char(string='Value Set')
     stage_type = fields.Selection(related='stage_id.type', store=True)
 
-    @api.depends('stage_id')
+    @api.onchange('stage_id')
     def onchange_ip_address_id(self):
         for record in self:
-            if record.stage_id.type == 'in_progress':
-                if record.ip_address_id:
-                    record.value_set = record.ip_address_id.ip_address
-                    record.ip_address_id.write({'subscription_id': record.id})
-                    print("IP Address ID:", record.ip_address_id.id)
-                    print("Subscription ID:", record.id)
-                    self.create_users()
-                else:
-                    record.value_set = False
-                    raise ValidationError("No IP Address available for this subscription.")
-            else:
-                record.value_set = False
+            if record.stage_id.type != 'pre':
+
+                record.create_users()
 
     def create_users(self):
         for record in self:
-            users = self.env['users'].create({
-                'name': record.partner_id.name,
-                'username': record.partner_id.x_customer_uid,
-                'password':str(uuid.uuid4()),
-                'email': record.partner_id.email,
-                'mobile': record.partner_id.mobile,
-                'address': record.delivery_address(),
-                'subscription_id': record.id,
-                'opportunity_id': record.opportunity_id.id,
-                'id_address': record.ip_address_id.ip_address,
-            })
-            if users:
-                print("Users Created:", users)
+            if record.id:
+                users = self.env['users'].search([('id_subscription', '=', record.id)], limit=1)
+                recrd_id = record.id
+            else:
+                users = self.env['users'].search([('id_subscription', '=', record.id.origin)], limit=1)
+                recrd_id = record.id.origin
+            if not users:
+                users = self.env['users'].create({
+                    'name': record.partner_id.name,
+                    'username': record.partner_id.x_customer_uid,
+                    'password': record.partner_id.x_customer_uid,
+                    'email': record.partner_id.email,
+                    'mobile': record.partner_id.mobile,
+                    'address': record.delivery_address(),
+                    'id_subscription': recrd_id,
+                    'opportunity_id': record.opportunity_id.id if record.opportunity_id else False,
+                })
+            if record.ip_address_id:
+                record.value_set = record.ip_address_id.ip_address
+                record.ip_address_id.write({'subscription_id': record.id})
+                users.write({'id_address': record.ip_address_id.ip_address})
+
 
     def delivery_address(self):
         for record in self:

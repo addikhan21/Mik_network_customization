@@ -32,8 +32,8 @@ class Users(models.Model):
     email = fields.Char(string="Email", required=False)
     mobile = fields.Char(string="Mobile", required=False)
     address = fields.Char(string="Address", required=False)
-    subscription_id = fields.Many2one("sale.subscription", string="Subscription")
-    id_address = fields.Char(string="ID Address", required=True)
+    id_subscription = fields.Char(string="Subscription id" ,readonly=True)
+    id_address = fields.Char(string="ID Address",readonly=True)
     opportunity_id = fields.Many2one('crm.lead', string='Opportunity', readonly=True)
 
 
