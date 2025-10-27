@@ -57,6 +57,7 @@ class ServiceGroup(models.Model):
             'name': service_group.name,
             'type': 'service',
             'sale_ok': True,
+            'is_isp_service': True,
             'purchase_ok': False,
             'service_group_id': service_group.id,
         })

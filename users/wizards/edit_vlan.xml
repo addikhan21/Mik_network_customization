@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_edit_vlan_wizard" model="ir.ui.view">
+            <field name="name">users.edit.vlan.form</field>
+            <field name="model">edit.vlan.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Create Radius User" onmouseover="this.classList.remove('o_content')">
+
+                    <div class="d-flex pb-2 align-items-center">
+                        <div>
+                            <i class="fa fa-angle-double-up pb-1 fa-3x text-primary" title="Users" />
+                        </div>
+                        <div class="card-body">
+                            <h2 class="card-title">Edit Vlan Details</h2>
+                            <p class="card-subtitle mb-2 text-muted">Your go-to solution for user
+                                profile updates.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <group>
+                        <div class="d-flex ">
+                            <i class="fa fa-user mt-1 me-2" role="img" aria-label="User" />
+                            <field name="user_id" string="User" readonly="1" />
+                        </div>
+                    </group>
+
+
+                    <group>
+
+                        <group string="Data to Update">
+                            <div>
+                                <field name="field_to_update" readonly="1" />
+                            </div>
+                        </group>
+
+                        <group string="Current VLAN">
+                            <div colspan="2">
+                                <field name="vlan_id" options="{'no_open': True}" readonly="1"
+                                    />
+                            </div>
+<!--                            <field name="package_nas_id" invisible="1" />-->
+                        </group>
+
+                        <group string="New VLAN" colspan="2">
+                            <div colspan="2">
+                                <field name="distributor_id" invisible="1" />
+<!--                                <field name="package_nas_id" invisible="1" />-->
+                                <field name="field_value"/>
+<!--                                <field name="field_value"-->
+<!--                                    options="{'no_open': True, 'no_create': True, 'no_edit': True}" />-->
+                            </div>
+                        </group>
+
+                    </group>
+
+
+                    <footer>
+                        <button name="action_update_vlan"
+                            string="Update"
+                            type="object"
+                            class="btn-primary" />
+                        <button special="cancel"
+                            string="Cancel"
+                            class="btn-secondary" />
+                    </footer>
+
+
+                </form>
+            </field>
+        </record>
+
+        <record id="action_vlan_wizard" model="ir.actions.act_window">
+            <field name="name">Vlan Wizard</field>
+            <field name="res_model">edit.vlan.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

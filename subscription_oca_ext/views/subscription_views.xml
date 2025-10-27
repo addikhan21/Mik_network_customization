@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_subscription_form_ip_ext" model="ir.ui.view">
+        <field name="name">sale.subscription.form.ip.ext</field>
+        <field name="model">sale.subscription</field>
+        <field name="inherit_id" ref="subscription_oca.sale_subscription_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="ip_address_id"/>
+            </xpath>
+            <xpath expr="//field[@name='sale_order_id']" position="after">
+                <field name="opportunity_id"/>
+                <field name="stage_type" invisible="1"/>
+                <field name="value_set" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

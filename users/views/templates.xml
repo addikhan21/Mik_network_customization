@@ -1,0 +1,26 @@
+<odoo>
+   
+<template id="status_cards_template">
+    <div class="d-flex justify-content-center container mt-3 flex-wrap">
+        <t t-foreach="[
+            {'title': 'Current Status', 'field': 'current_status', 'icon': 'fa-heartbeat', 'icon_color': 'text-warning', 'tooltip': 'Retention Target'},
+            {'title': 'Activation State', 'field': 'activation_status', 'icon': 'fa-bullseye', 'icon_color': 'text-success', 'tooltip': 'Invoice Target'},
+            {'title': 'Connection State', 'field': 'conection_status', 'icon': 'fa-wifi', 'icon_color': 'text-warning', 'tooltip': 'Clients Target'},
+            {'title': 'Subscription Expiry', 'field': 'subscription_expiry', 'icon': 'fa-ban', 'icon_color': 'text-info', 'tooltip': 'Visit Target'}
+        ]" t-as="card">
+            <div class="card-body m-2 rounded-3 border border-secondary bg-light"
+                 onmouseover="this.classList.add('shadow-sm')"
+                 onmouseout="this.classList.remove('shadow-sm')">
+                <div class="d-flex justify-content-between text-wrap">
+                    <h5 class="card-title text-muted"><t t-esc="card['title']"/></h5>
+                    <i t-attf-class="fa #{card['icon']} pb-1 #{card['icon_color']}" t-att-title="card['tooltip']"/>
+                </div>
+                <h2 class="card-subtitle" style="margin: 0; padding: 0;">
+                    <field t-att-name="card['field']" readonly="1"/>
+                </h2>
+            </div>
+        </t>
+    </div>
+</template>
+    
+</odoo>

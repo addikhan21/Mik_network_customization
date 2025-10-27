@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="crm_lead_view_form_inherit" model="ir.ui.view">
+        <field name="name">crm.lead.form.inherit</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='opportunity_partner']" position="inside">
+                <field name="data_package_id" invisible="type == 'lead'"/>
+                <field name="hardware_required" invisible="type == 'lead'"/>
+            </xpath>
+             <xpath expr="//field[@name='tag_ids']" position="after">
+                <field name="otc" invisible="type == 'lead'"/>
+                <field name="service_charges" invisible="type == 'lead'"/>
+            </xpath>
+            <xpath expr="//label[@for='street']" position="attributes">
+                <attribute name="string">Service Address</attribute>
+            </xpath>
+            <xpath expr="//field[@name='city']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+             <xpath expr="//field[@name='stage_id']" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='state_id']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='zip']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='country_id']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+            <xpath expr="//page[@name='internal_notes']" position="before">
+                <page string="Hardware Requirement" name="is_hard_equipment_ids" invisible="not hardware_required">
+                    <field
+                            name="is_hard_equipment_ids"
+                            widget="sol_o2m"
+                            mode="list"
+                            readonly="type == 'lead'">
+                        <list editable="bottom">
+                            <field name="product_id" domain="[('is_isp_equipment', '=', True)]"/>
+                            <field name="quantity"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>
