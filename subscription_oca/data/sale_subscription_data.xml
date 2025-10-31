@@ -79,7 +79,7 @@
         <field name="name">Other</field>
     </record>
     <data noupdate="1">
-        <record id="close_reason_other" model="sale.subscription.template">
+        <record id="subscription_oca" model="sale.subscription.template">
             <!-- <field eval="True" name="active"/> -->
             <field name="name">subscription_oca</field>
         </record>
