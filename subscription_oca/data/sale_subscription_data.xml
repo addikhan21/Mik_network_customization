@@ -71,6 +71,10 @@
     <!-- <field eval="True" name="active"/> -->
     <field name="name">Other</field>
   </record>
+    <record id="close_reason_other" model="sale.subscription.template">
+    <!-- <field eval="True" name="active"/> -->
+    <field name="name">subscription_oca</field>
+  </record>
 
 
 </odoo>
