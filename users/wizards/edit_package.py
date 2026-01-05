@@ -26,7 +26,7 @@ class UpdateUserProfile(models.TransientModel):
     
     # expiry_date = fields.Datetime(realted="user_id.expiry_date", string="Expiry Date")
 
-    package_id = fields.Many2one("package.line", string="Package")
+    package_id = fields.Many2one("product.product", string="Package")
     releated_nas_id = fields.Many2one("nas", string="Related Nas Id")
     # distributor_id = fields.Many2one("distributors", string="Distributor")
 

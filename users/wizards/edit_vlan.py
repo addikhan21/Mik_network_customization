@@ -22,13 +22,13 @@ class EditVlan(models.TransientModel):
 
     user_id = fields.Many2one("users", string="User")
 
-    vlan_id = fields.Many2one("vlans", string="Vlan ID")
-    package_id = fields.Many2one("package.line", string="Package")
+    vlan_id = fields.Many2one("res.users", string="Vlan ID")
+    package_id = fields.Many2one("product.product", string="Package")
     package_nas_id = fields.Many2one("nas", string="Package Nas Id")
     # distributor_id = fields.Many2one("distributors", string="Distributor")
 
     field_value = fields.Many2one(
-        "vlans", string="New Value"
+        "res.users", string="New Value"
     )
     
     # def check_access(self):

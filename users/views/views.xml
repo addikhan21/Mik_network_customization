@@ -115,7 +115,7 @@
                             </div>
 
 
-                            <!-- <div class="card-body m-2 rounded-3 border border-secondary
+                             <div class="card-body m-2 rounded-3 border border-secondary
                             bg-light"
                                 onmouseover="this.classList.add('shadow-sm')"
                                 onmouseout="this.classList.remove('shadow-sm')">
@@ -131,7 +131,7 @@
                                         decoration-danger="activation_status == 'inactive'"
                                         decoration-success="activation_status == 'active'" />
                                 </h2>
-                            </div> -->
+                            </div>
 
 
                             <div class="card-body m-2 rounded-3 border border-secondary bg-light"
@@ -236,38 +236,22 @@
                                 }" />
 
 
-<!--                            <button name="%(action_users_profile_wizard)d"-->
-<!--                                string="Edit Profile"-->
-<!--                                type="action"-->
-<!--                                title="Edit Profile"-->
-<!--                                onmouseover="this.classList.add('bg-info', 'text-white')"-->
-<!--                                onmouseout="this.classList.remove('bg-info', 'text-white')"-->
-<!--                                class="oe_highlight btn btn-light m-2 flex-fill"-->
-<!--                                role="button"-->
-<!--                                icon="fa-user"-->
-<!--                                context="{-->
-<!--                                    'default_user_id': active_id,-->
-<!--                                }"-->
-<!--                                confirm="Do you want to edit profile?"-->
-<!--                                confirm-label="Edit Profile"-->
-<!--                            />-->
+                            <button name="%(action_users_profile_wizard)d"
+                                string="Edit Profile"
+                                type="action"
+                                title="Edit Profile"
+                                onmouseover="this.classList.add('bg-info', 'text-white')"
+                                onmouseout="this.classList.remove('bg-info', 'text-white')"
+                                class="oe_highlight btn btn-light m-2 flex-fill"
+                                role="button"
+                                icon="fa-user"
+                                context="{
+                                    'default_user_id': id,
+                                }"
+                                confirm="Do you want to edit profile?"
+                                confirm-label="Edit Profile"
+                            />
 
-<!--                            <button name="%(action_vlan_wizard)d"-->
-<!--                                string="Edit Vlan"-->
-<!--                                type="action"-->
-<!--                                title="Edit Vlan"-->
-<!--                                onmouseover="this.classList.add('bg-info', 'text-white')"-->
-<!--                                onmouseout="this.classList.remove('bg-info', 'text-white')"-->
-<!--                                class="oe_highlight btn btn-light m-2 flex-fill"-->
-<!--                                role="button"-->
-<!--                                icon="fa-sitemap"-->
-<!--                                confirm="Do you want to edit vlan?"-->
-<!--                                confirm-label="Edit VLAN"-->
-<!--                                context="{-->
-<!--                                    'default_user_id': active_id,-->
-<!--                                    'default_field_to_update': 'vlan_id',-->
-<!--                                }"-->
-<!--                            />-->
                             <button name="%(action_vlan_wizard)d"
                                 string="Edit Vlan"
                                 type="action"
@@ -279,54 +263,70 @@
                                 icon="fa-sitemap"
                                 confirm="Do you want to edit vlan?"
                                 confirm-label="Edit VLAN"
-                        />
+                                context="{
+                                    'default_user_id': id,
+                                    'default_field_to_update': 'vlan_id',
+                                }"
+                            />
+<!--                            <button name="%(action_vlan_wizard)d"-->
+<!--                                string="Edit Vlan"-->
+<!--                                type="action"-->
+<!--                                title="Edit Vlan"-->
+<!--                                onmouseover="this.classList.add('bg-info', 'text-white')"-->
+<!--                                onmouseout="this.classList.remove('bg-info', 'text-white')"-->
+<!--                                class="oe_highlight btn btn-light m-2 flex-fill"-->
+<!--                                role="button"-->
+<!--                                icon="fa-sitemap"-->
+<!--                                confirm="Do you want to edit vlan?"-->
+<!--                                confirm-label="Edit VLAN"-->
+<!--                        />-->
 <!--                             context="{-->
 <!--                                    'default_user_id': id,-->
 <!--                                    'default_field_to_update': 'vlan_id',-->
 <!--                                }"-->
 
 
-<!--                            <button name="%(action_users_package_wizard)d"-->
-<!--                                string="Edit Package"-->
-<!--                                type="action"-->
-<!--                                title="Edit Package"-->
-<!--                                invisible="conection_status == 'active'"-->
-<!--                                onmouseover="this.classList.add('bg-info', 'text-white')"-->
-<!--                                onmouseout="this.classList.remove('bg-info', 'text-white')"-->
-<!--                                class="oe_highlight btn btn-light m-2 flex-fill"-->
-<!--                                role="button"-->
-<!--                                icon="fa-cube"-->
-<!--                                context="{-->
-<!--                                    'default_user_id': active_id,-->
-<!--                                    'default_field_to_update': 'package_id',-->
-<!--                                }"-->
-<!--                                confirm="Do you want to edit package?"-->
-<!--                                confirm-label="Edit Package"-->
-<!--                            />-->
                             <button name="%(action_users_package_wizard)d"
                                 string="Edit Package"
                                 type="action"
                                 title="Edit Package"
                                 invisible="conection_status == 'active'"
+                                onmouseover="this.classList.add('bg-info', 'text-white')"
+                                onmouseout="this.classList.remove('bg-info', 'text-white')"
                                 class="oe_highlight btn btn-light m-2 flex-fill"
+                                role="button"
                                 icon="fa-cube"
                                 context="{
                                     'default_user_id': id,
                                     'default_field_to_update': 'package_id',
                                 }"
                                 confirm="Do you want to edit package?"
-                                confirm-label="Edit Package"/>
-
-<!--                            <button name="action_refresh_connection"-->
-<!--                                string=""-->
-<!--                                type="object"-->
-<!--                                title="Refresh"-->
-<!--                                onmouseover="this.classList.add('bg-danger', 'text-white')"-->
-<!--                                onmouseout="this.classList.remove('bg-danger', 'text-white')"-->
+                                confirm-label="Edit Package"
+                            />
+<!--                            <button name="%(action_users_package_wizard)d"-->
+<!--                                string="Edit Package"-->
+<!--                                type="action"-->
+<!--                                title="Edit Package"-->
+<!--                                invisible="conection_status == 'active'"-->
 <!--                                class="oe_highlight btn btn-light m-2 flex-fill"-->
-<!--                                role="button"-->
-<!--                                icon="fa-refresh"-->
-<!--                                confirm="Are you sure you want to refresh this user's connection? This will disconnect their current session." />-->
+<!--                                icon="fa-cube"-->
+<!--                                context="{-->
+<!--                                    'default_user_id': id,-->
+<!--                                    'default_field_to_update': 'package_id',-->
+<!--                                }"-->
+<!--                                confirm="Do you want to edit package?"-->
+<!--                                confirm-label="Edit Package"/>-->
+
+                            <button name="action_refresh_connection"
+                                string=""
+                                type="object"
+                                title="Refresh"
+                                onmouseover="this.classList.add('bg-danger', 'text-white')"
+                                onmouseout="this.classList.remove('bg-danger', 'text-white')"
+                                class="oe_highlight btn btn-light m-2 flex-fill"
+                                role="button"
+                                icon="fa-refresh"
+                                confirm="Are you sure you want to refresh this user's connection? This will disconnect their current session." />
                         </div>
 
 
@@ -543,7 +543,7 @@
                                     </div>
                                 </div>
 
-                                <!-- Ledger Details
+<!--                               Ledger Details-->
                                 <div class="accordion-item m-2 border rounded-3">
                                     <h2 class="accordion-header" id="headingLedgerDetails">
                                         <a class="accordion-button collapsed" type="button"
@@ -560,7 +560,7 @@
                                             <p>Tested</p>
                                         </div>
                                     </div>
-                                </div> -->
+                                </div>
 
                                 <!-- IP History -->
                                 <div class="accordion-item m-2 border rounded-3">
