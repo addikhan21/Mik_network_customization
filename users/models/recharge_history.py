@@ -8,8 +8,8 @@ class RechargeHistory(models.Model):
     _rec_name = 'user_id'
    
     user_id = fields.Many2one('users', string='User', index=True, required=True,)
-    distributor_id = fields.Many2one(related='user_id.distributor_id', index=True, string='Distributor')
-    distributor_type = fields.Selection(related='distributor_id.distributor_type', string='Distributor')
+    # distributor_id = fields.Many2one(related='user_id.distributor_id', index=True, string='Distributor')
+    # distributor_type = fields.Selection(related='distributor_id.distributor_type', string='Distributor')
     package_id = fields.Many2one('package.line', string='Package' , index=True)
     amount = fields.Float(string='Recharge Amount', required=True)
     currency_id = fields.Many2one('res.currency', string='Currency',

@@ -25,27 +25,27 @@ class EditVlan(models.TransientModel):
     vlan_id = fields.Many2one("vlans", string="Vlan ID")
     package_id = fields.Many2one("package.line", string="Package")
     package_nas_id = fields.Many2one("nas", string="Package Nas Id")
-    distributor_id = fields.Many2one("distributors", string="Distributor")
+    # distributor_id = fields.Many2one("distributors", string="Distributor")
 
     field_value = fields.Many2one(
         "vlans", string="New Value"
     )
     
-    def check_access(self):
-        if not self.env.user.has_group('base_security_groups.group_admin'):
-            if self.env.user.distributor_id.id != self.distributor_id.id:
-                raise UserError(_("⛔ Sorry superhero, your powers don't work here! Only admins have the special cape for this. 🦸‍♂️"))
-        return True
+    # def check_access(self):
+    #     if not self.env.user.has_group('base_security_groups.group_admin'):
+    #         if self.env.user.distributor_id.id != self.distributor_id.id:
+    #             raise UserError(_("⛔ Sorry superhero, your powers don't work here! Only admins have the special cape for this. 🦸‍♂️"))
+    #     return True
 
     @api.onchange("user_id")
     def _compute_user_details(self):
         for record in self:
             if record.user_id:
                 record.package_id = record.user_id.package_id
-                record.distributor_id = record.user_id.distributor_id.id
+                # record.distributor_id = record.user_id.distributor_id.id
                 record.vlan_id = record.user_id.vlan_id
                 # record.package_nas_id = record.package_id.package_id.nas_id.id
-                record.package_nas_id = record.distributor_id.nas_id.id
+                # record.package_nas_id = record.distributor_id.nas_id.id
                 print( "NAS pACKAGE", (record.package_nas_id.id))
                 
 

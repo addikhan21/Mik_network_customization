@@ -37,42 +37,45 @@ class Users(models.Model):
     opportunity_id = fields.Many2one('crm.lead', string='Opportunity', readonly=True)
 
 
-    distributor_id = fields.Many2one(
-        "distributors",
-        string="Distributor",
-        index=True,
-        # required=True,
-    )
+    # distributor_id = fields.Many2one(
+    #     "distributors",
+    #     string="Distributor",
+    #     index=True,
+    #     # required=True,
+    # )
 
     # master_dealer_id = fields.Many2one(
     #     related="distributor_id.master_dealer_id", store=True
     # )
     # dealer_id = fields.Many2one(related="distributor_id.dealer_id", index=True, store=True)
-    distributor_name = fields.Char(
-         store=True, string="Distributor Name"
-    )
-    distributor_type = fields.Selection(
-        related="distributor_id.distributor_type", store=True
-    )
+    # distributor_name = fields.Char(
+    #      store=True, string="Distributor Name"
+    # )
+    # distributor_type = fields.Selection(
+    #     related="distributor_id.distributor_type", store=True
+    # )
     package_id = fields.Many2one(
-        "package.line",
+        "product.product",
 
         string="Package",
         index=True,
         # required=True,
     )
+    package_name = fields.Char(
+        related="package_id.name",string="Package Name"
+    )
     # package_name = fields.Char(
     #     related="package_id.package_name", store=True, string="Package Name"
     # )
-    package_distributor = fields.Many2one(
-        "distributors", related="package_id.dealer_id", string="Package Distributor"
-    )
-    nas_id = fields.Many2one(
-        related="package_id.package_id", store=True, string="NAS ID"
-    )
-    # nas_id = fields.Many2one(
-    #     related="distributor_id.nas_id", store=True, string="NAS ID"
+    # package_distributor = fields.Many2one(
+    #     "distributors", related="package_id.dealer_id", string="Package Distributor"
     # )
+    # nas_id = fields.Many2one(
+    #     related="package_id.package_id", store=True, string="NAS ID"
+    # )
+    nas_id = fields.Many2one(
+         store=True, string="NAS ID"
+    )
     # vlan_id = fields.Many2one(
     #     "vlans",
     #     domain="[ ('nas_id','=',nas_id)]",
@@ -80,7 +83,7 @@ class Users(models.Model):
     # )
     vlan_id = fields.Many2one(
         "res.users",
-        domain="[ ('nas_id','=',nas_id)]",
+        # domain="[ ('nas_id','=',nas_id)]",
         string="VLAN",
     )
     # mac_address = fields.Char(string="MAC Address", compute="_compute_mac_address")  # Original compute field
@@ -200,7 +203,6 @@ class Users(models.Model):
     def _compute_access(self):
         for record in self:
             is_admin = self.env.user.has_group("base_security_groups.group_admin")
-            is_distributor = self.env.user.distributor_id.id == record.distributor_id.id
             record.can_access = not (is_admin or is_distributor)
 
     @api.depends()
@@ -428,18 +430,18 @@ class Users(models.Model):
     #         else:
     #             record.current_status = "indeterminate"
 
-    @api.onchange("distributor_id")
-    def _onchange_distributor_id(self):
-        self.package_id = False
-        self.vlan_id = False
+    # @api.onchange("distributor_id")
+    # def _onchange_distributor_id(self):
+    #     self.package_id = False
+    #     self.vlan_id = False
 
-    @api.depends("distributor_id")
-    def _compute_total_recharges(self):
-        for record in self:
-            total = self.env["recharge.history"].search_count(
-                [("user_id", "=", record.id)]
-            )
-            record.recharge_count = total
+    # @api.depends("distributor_id")
+    # def _compute_total_recharges(self):
+    #     for record in self:
+    #         total = self.env["recharge.history"].search_count(
+    #             [("user_id", "=", record.id)]
+    #         )
+    #         record.recharge_count = total
 
     def _compute_radcheck_count(self):
         for record in self:
@@ -464,9 +466,9 @@ class Users(models.Model):
         """
 
         res = super().create(vals_list)
-        # for record in res:
+        for record in res:
         #     record.create_radcheck_entry()
-        #     record.create_radusergroup_entry()
+            record.create_radusergroup_entry()
         #     if record.vlan_id:
         #         record.vlan_id.is_assigned_to_user = True
 
@@ -481,7 +483,7 @@ class Users(models.Model):
         if self.username and self.package_id:
             radusergroup_vals = {
                 "username": self.username,
-                # "groupname": self.package_name,
+                "groupname": self.package_name,
                 "priority": 1,
             }
             radusergroup = self.env["radusergroup"].sudo().create(radusergroup_vals)
@@ -520,9 +522,9 @@ class Users(models.Model):
                     "op": ":=",
                     "value": self.expiry_date_char,
                 },
-                
+
             ]
-           
+
 
             # Making Vlan Biniding Optional.
             if self.vlan_id:
@@ -558,7 +560,7 @@ class Users(models.Model):
             "target": "new",
             "context": {"create": False, "delete": False, "update": False},
         }
-        
+
     def action_disable_user(self):
         for record in self:
             reject_values = {
@@ -578,9 +580,9 @@ class Users(models.Model):
                 "type": "ir.actions.client",
                 "tag": "reload",
                 }
-            
+
     def action_enable_user(self):
-        for record in self: 
+        for record in self:
             existing_auth_type = self.env["radcheck"].sudo().search([("username", "=", record.username),("attribute", "=", "Auth-Type"),],limit=1, )
             if existing_auth_type:
                 existing_auth_type.unlink()
@@ -589,9 +591,9 @@ class Users(models.Model):
                     "type": "ir.actions.client",
                     'tag': 'reload',
                     }
-            
-            
-            
+
+
+
 
     def action_release_mac(self):
         self.ensure_one()
@@ -648,7 +650,7 @@ class Users(models.Model):
                 record.conection_status = "active"
             else:
                 record.conection_status = "expired"
-                
+
 
 
     def action_refresh_connection(self):

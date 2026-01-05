@@ -48,11 +48,14 @@
                         </h2>
                     </a>
                 </div>
-
                 <div class="card-body m-2 rounded-3 border border-secondary bg-light"
                      onmouseover="this.classList.add('shadow-sm')"
                      onmouseout="this.classList.remove('shadow-sm')"
-                     invisible="distributor_type == 'sub_dealer'">
+                     >
+<!--                <div class="card-body m-2 rounded-3 border border-secondary bg-light"-->
+<!--                     onmouseover="this.classList.add('shadow-sm')"-->
+<!--                     onmouseout="this.classList.remove('shadow-sm')"-->
+<!--                     invisible="distributor_type == 'sub_dealer'">-->
                     <a name="action_view_total_users" type="object"
                        style="text-decoration: none; color: inherit;">
                         <div class="d-flex justify-content-between text-wrap">

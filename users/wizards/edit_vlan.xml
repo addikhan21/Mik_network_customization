@@ -46,7 +46,7 @@
 
                         <group string="New VLAN" colspan="2">
                             <div colspan="2">
-                                <field name="distributor_id" invisible="1" />
+<!--                                <field name="distributor_id" invisible="1" />-->
 <!--                                <field name="package_nas_id" invisible="1" />-->
                                 <field name="field_value"/>
 <!--                                <field name="field_value"-->

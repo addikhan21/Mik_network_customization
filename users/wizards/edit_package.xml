@@ -46,7 +46,7 @@
 
             <group string="New Value" colspan="2">
               <div colspan="2">
-                <field name="distributor_id" invisible="1" />
+<!--                <field name="distributor_id" invisible="1" />-->
                 <field name="field_value"
                   options="{'no_open': True, 'no_create': True, 'no_edit': True}" />
               </div>

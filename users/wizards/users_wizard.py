@@ -29,7 +29,7 @@ class UpdateUser(models.TransientModel):
     )
 
     user_id = fields.Many2one("users", string="User")
-    distributor_id = fields.Many2one(related='user_id.distributor_id', string="Distributor")
+    # distributor_id = fields.Many2one(related='user_id.distributor_id', string="Distributor")
 
     password = fields.Char(string="Password", readonly=True)
 
@@ -42,12 +42,12 @@ class UpdateUser(models.TransientModel):
                 record.password = record.user_id.password
     
     
-    def check_access(self):
-        if not self.env.user.has_group('base_security_groups.group_admin'):
-            if self.env.user.distributor_id.id != self.distributor_id.id:
-                raise UserError(_("⛔ Sorry superhero, your powers don't work here! Only admins have the special cape for this. 🦸‍♂️"))
-        return True
-                
+    # def check_access(self):
+    #     if not self.env.user.has_group('base_security_groups.group_admin'):
+    #         if self.env.user.distributor_id.id != self.distributor_id.id:
+    #             raise UserError(_("⛔ Sorry superhero, your powers don't work here! Only admins have the special cape for this. 🦸‍♂️"))
+    #     return True
+    #
 
 
     def action_update_password(self):

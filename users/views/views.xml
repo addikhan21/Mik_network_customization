@@ -7,18 +7,18 @@
         <field name="arch" type="xml">
             <list string="Users">
                 <field name="is_disable" column_invisible="1" />
-                <field name="conection_status" column_invisible="1" />
-                <field name="current_status" column_invisible="1" />
-                <field name="username" widget='badge'
-                    decoration-danger="current_status == 'offline'"
-                    decoration-success="current_status == 'online'" />
-                <field name="name" />
-                <field name="package_id" />
-                <field name="expiry_date_char" />
-                <!-- <field name="distributor_type" /> -->
-                <field name="address" />
-                <field name="distributor_id" optional="hide" />
-                <field name="mobile" optional="hide" />
+<!--                <field name="conection_status" column_invisible="1" />-->
+<!--                <field name="current_status" column_invisible="1" />-->
+<!--                <field name="username" widget='badge'-->
+<!--                    decoration-danger="current_status == 'offline'"-->
+<!--                    decoration-success="current_status == 'online'" />-->
+<!--                <field name="name" />-->
+<!--                <field name="package_id" />-->
+<!--                <field name="expiry_date_char" />-->
+<!--                &lt;!&ndash; <field name="distributor_type" /> &ndash;&gt;-->
+<!--                <field name="address" />-->
+<!--                <field name="distributor_id" optional="hide" />-->
+<!--                <field name="mobile" optional="hide" />-->
 
             </list>
         </field>
@@ -53,7 +53,7 @@
                     <field name="expiry_date" invisible="1" />
                     <field name="radusergroup_id" invisible="1" />
                     <field name="can_access" invisible="1" />
-                    <field name="package_distributor" invisible="1" />
+<!--                    <field name="package_distributor" invisible="1" />-->
                     <field name="is_disable" invisible="1" />
                     <field name="conection_status" invisible="1" />
 
@@ -279,11 +279,11 @@
                                 icon="fa-sitemap"
                                 confirm="Do you want to edit vlan?"
                                 confirm-label="Edit VLAN"
-                                context="{
-                                    'default_user_id': id,
-                                    'default_field_to_update': 'vlan_id',
-                                }"
                         />
+<!--                             context="{-->
+<!--                                    'default_user_id': id,-->
+<!--                                    'default_field_to_update': 'vlan_id',-->
+<!--                                }"-->
 
 
 <!--                            <button name="%(action_users_package_wizard)d"-->
@@ -346,13 +346,20 @@
                                         class="accordion-collapse collapse show"
                                         aria-labelledby="headingUserDetails">
                                         <div class="accordion-body">
-                                            <div
-                                                invisible="distributor_id == package_distributor"
+                                             <div
                                                 class="float-end text-danger">
                                                 <i class="fa fa-exclamation-triangle" /> Issues with
                                                 Record Health</div>
+<!--                                            <div-->
+<!--                                                invisible="distributor_id == package_distributor"-->
+<!--                                                class="float-end text-danger">-->
+<!--                                                <i class="fa fa-exclamation-triangle" /> Issues with-->
+<!--                                                Record Health</div>-->
+<!--                                            <div-->
+<!--                                                invisible="distributor_id != package_distributor"-->
+<!--                                                class="float-end text-muted">-->
+<!--                                                <i class="fa fa-check-circle" /> Record Health 100% </div>-->
                                             <div
-                                                invisible="distributor_id != package_distributor"
                                                 class="float-end text-muted">
                                                 <i class="fa fa-check-circle" /> Record Health 100% </div>
 
@@ -377,10 +384,10 @@
                                                         <td>
                                                             Distributor</td>
                                                         <td>
-                                                            <field name="distributor_id"
-                                                                readonly="1"
-                                                                options="{'no_open': True, 'no_create': True, 'no_create_edit': True}"
-                                                            />
+<!--                                                            <field name="distributor_id"-->
+<!--                                                                readonly="1"-->
+<!--                                                                options="{'no_open': True, 'no_create': True, 'no_create_edit': True}"-->
+<!--                                                            />-->
                                                         </td>
 
                                                     </tr>
@@ -493,14 +500,15 @@
                                                         </td>
                                                     </tr>
 
-                                                    <tr invisible="not nas_id">
+<!--                                                    <tr invisible="not nas_id">-->
+                                                    <tr>
                                                         <td>NAS IP</td>
                                                         <td>
 
-                                                            <field name="nas_id"
-                                                                options="{'no_open': True, 'no_create': True, 'no_create_edit': True}"
-                                                                readonly="1"
-                                                            />
+<!--                                                            <field name="nas_id"-->
+<!--                                                                options="{'no_open': True, 'no_create': True, 'no_create_edit': True}"-->
+<!--                                                                readonly="1"-->
+<!--                                                            />-->
 
                                                         </td>
                                                     </tr>
@@ -620,19 +628,19 @@
                         </section>
                     </section>
 
-                    <group invisible="radusergroup_id">
+                    <group>
                         <group>
-                            <field name="distributor_id"
-                                readonly="distributor_id" force_save="1"
-                                options="{'no_open': True,'no_create' : True, 'no_create_edit' : True}"
-                                groups="base_security_groups.group_admin,base_security_groups.group_distributor" />
-                            <field name="distributor_type" />
+<!--                            <field name="distributor_id"-->
+<!--                                readonly="distributor_id" force_save="1"-->
+
+<!--                                 />-->
+<!--                            <field name="distributor_type" />-->
                             <field name="package_id"
+                                 />
+                            <field name="vlan_id"
                                 options="{'no_open': True,'no_create' : True, 'no_create_edit' : True}" />
-<!--                            <field name="vlan_id"-->
+<!--                            <field name="nas_id"-->
 <!--                                options="{'no_open': True,'no_create' : True, 'no_create_edit' : True}" />-->
-                            <field name="nas_id"
-                                options="{'no_open': True,'no_create' : True, 'no_create_edit' : True}" />
                             <field name="id_subscription"/>
                             <field name="id_address"/>
                             <field name="opportunity_id"/>
