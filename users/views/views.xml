@@ -7,18 +7,18 @@
         <field name="arch" type="xml">
             <list string="Users">
                 <field name="is_disable" column_invisible="1" />
-<!--                <field name="conection_status" column_invisible="1" />-->
-<!--                <field name="current_status" column_invisible="1" />-->
-<!--                <field name="username" widget='badge'-->
-<!--                    decoration-danger="current_status == 'offline'"-->
-<!--                    decoration-success="current_status == 'online'" />-->
-<!--                <field name="name" />-->
-<!--                <field name="package_id" />-->
-<!--                <field name="expiry_date_char" />-->
-<!--                &lt;!&ndash; <field name="distributor_type" /> &ndash;&gt;-->
-<!--                <field name="address" />-->
+                <field name="conection_status" column_invisible="1" />
+                <field name="current_status" column_invisible="1" />
+                <field name="username" widget='badge'
+                    decoration-danger="current_status == 'offline'"
+                    decoration-success="current_status == 'online'" />
+                <field name="name" />
+                <field name="package_id" />
+                <field name="expiry_date_char" />
+                <!-- <field name="distributor_type" /> -->
+                <field name="address" />
 <!--                <field name="distributor_id" optional="hide" />-->
-<!--                <field name="mobile" optional="hide" />-->
+                <field name="mobile" optional="hide" />
 
             </list>
         </field>
