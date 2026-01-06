@@ -84,7 +84,7 @@ class Distributors(models.Model):
             
             admin.expired_count = self.env["users"].search_count(
                 [
-                    ("distributor_id", "=", admin.distributor_id.id),
+                    # ("distributor_id", "=", admin.distributor_id.id),
                     ("expiry_date", "<", fields.Datetime.now()),
                 ]
             )
