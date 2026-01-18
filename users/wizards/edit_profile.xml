@@ -12,9 +12,9 @@
               <i class="fa fa-user pb-1 fa-3x text-primary" title="Users"
                 style="transform: rotate(180deg) scaleY(-1);" />
             </div>
-            <div class="card-body">
-              <h2 class="card-title">Edit Profile Details</h2>
-              <p class="card-subtitle mb-2 text-muted">Your go-to solution for user
+            <div class="card-body" style="margin-top:10px !important;">
+              <h2 class="card-title ms-2">Edit Profile Details</h2>
+              <p class="card-subtitle mb-2 text-muted ms-2">Your go-to solution for user
                 profile updates.
               </p>
             </div>

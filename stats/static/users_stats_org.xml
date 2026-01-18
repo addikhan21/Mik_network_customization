@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates xml:space="preserve">
+
+	<t t-name="stats.UserStats2" owl="1">
+
+		<div class="vh-100 overflow-auto" t-ref="containerRef">
+
+
+			<div class=" shadow-sm d-flex m-3 p-4 mt-8 bg-white align-items-center flex-wrap justify-content-between" style="border-radius: 10px">
+				<div class="my-2 ">
+					<div class="d-flex align-items-center ">
+						<div>
+							<i class="fa fa-fort-awesome  fa-3x text-info"></i>
+						</div>
+
+						<div>
+							<span class="section-title text-info m-0">
+								<t t-esc="state.current_balance"/>
+							</span>
+							<h4 class="section-subtitle m-0 text-muted">
+									Current Balance
+							</h4>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="d-flex align-items-center flex-wrap justify-content-end gap-2">
+					<div class="text-muted cursor-pointer" role="search" t-ref="refresher">
+						<Refresher t-props="refresherProps" />
+					</div>
+
+					<div class="text-muted cursor-pointer" aria-label="Show All Users" title="Show All Users" role="button" t-on-click="handleUsers">
+						<div class="icon">
+							<i class="fa fa-users btn btn-info"/>
+						</div>
+					</div>
+
+					<div class="text-muted cursor-pointer" aria-label="Show My Home" title="Show My Home" role="button" t-on-click="handleHome">
+						<div class="icon">
+							<i class="fa fa-home btn btn-primary"/>
+						</div>
+					</div>
+
+					<div class="text-muted cursor-pointer" aria-label="Logout" title="Logout" role="button" t-on-click="log_out_user">
+						<div class="icon">
+							<i class="fa fa-power-off btn btn-danger"/>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+
+			<div class=" shadow-sm m-3 p-4 mt-8 bg-white " style="border-radius: 10px">
+
+				<div class="d-flex mt-3 flex-wrap">
+					<div class="card_user_count cursor-pointer" t-on-click="viewOnlineUsers">
+
+						<div class="bg-icon">
+							<i class="fa fa-globe fa-2x"></i>
+						</div>
+						<div class="icon">
+							<i class="fa fa-wifi"/>
+						</div>
+						<div class="number">
+							<span t-esc="state.onlineUsers"/>
+						</div>
+						<div class="label">Online Users</div>
+					</div>
+
+					<div class="card_user_count cursor-pointer" t-on-click="viewOfflineUsers">
+						<div class="bg-icon">
+							<i class="fa fa-user-times fa-2x"></i>
+						</div>
+						<div class="icon">
+							<i class="fa fa-anchor"/>
+						</div>
+						<div class="number">
+							<span t-esc="state.offlineUsers"/>
+						</div>
+						<div class="label">Offline Users</div>
+					</div>
+
+
+					<div class="card_user_count cursor-pointer" t-on-click="viewActiveUsers">
+						<div class="bg-icon">
+							<i class="fa fa-history fa-2x"></i>
+						</div>
+						<div class="icon">
+							<i class="fa fa-dot-circle-o"/>
+						</div>
+						<div class="number">
+							<span t-esc="state.activeUsers"/>
+						</div>
+						<div class="label">Active Users</div>
+					</div>
+
+					<div class="card_user_count cursor-pointer" t-on-click="viewDisableUsers">
+						<div class="bg-icon">
+							<i class="fa fa-ban fa-2x"></i>
+						</div>
+						<div class="icon">
+							<i class="fa fa-ban"/>
+						</div>
+						<div class="number">
+							<span t-esc="state.disabledUsers"/>
+						</div>
+						<div class="label">Disabled Users</div>
+
+					</div>
+					<div class="card_user_count cursor-pointer" t-on-click="viewInActiveUsers">
+						<div class="bg-icon">
+							<i class="fa fa-hourglass-end fa-2x"></i>
+						</div>
+						<div class="icon">
+							<i class="fa fa-exclamation-triangle"/>
+						</div>
+						<div class="number">
+							<span t-esc="state.inactiveUsers"/>
+						</div>
+						<div class="label">Expired Users</div>
+
+					</div>
+
+
+					<div class="card_user_count cursor-pointer" t-on-click="viewTotalUsers">
+						<div class="bg-icon">
+							<i class="fa fa-user-circle fa-2x"></i>
+						</div>
+						<div class="icon">
+							<i class="fa fa-users"/>
+						</div>
+						<div class="number">
+							<span t-esc="state.totalUsers"/>
+						</div>
+						<div class="label">Total Users</div>
+
+					</div>
+				</div>
+
+			</div>
+			<div class="row mx-2 px-2 " style="border-radius: 10px">
+				<div class="col-lg-4 m-0 p-0  flex-grow" style="margin-bottom: 30px;">
+					<div class="shadow-sm me-3 p-4 bg-white h-100" style="border-radius: 12px; margin-bottom: 30px;">
+						<div class="d-flex align-items-center justify-content-between">
+							<h3 class="text-primary fw-bold">
+								Server Utilization
+							</h3>
+						</div>
+						<ChartRenderer type="'doughnut'" data="state.serverUtilization.diskUsage" />
+						<p class="text-muted d-flex justify-content-center text-center text-wrap m-0">
+							<span t-out="state.serverUtilization.message"/>
+						</p>
+					</div>
+				</div>
+				<div class="col-lg-4 m-0 p-0 flex-grow">
+					<div class="shadow-sm me-3 p-4 bg-white h-100" style="border-radius: 12px; margin-bottom: 30px;">
+						<div class="d-flex align-items-center justify-content-between">
+							<h3 class="text-primary fw-bold">
+								Package Distribution
+							</h3>
+						</div>
+						<ChartRenderer type="'radar'" data="state.packageSubscriptions.subData" />
+						<p class="text-muted d-flex justify-content-center text-center text-wrap m-0">
+							<span t-out="state.packageSubscriptions.message"/>
+						</p>
+					</div>
+				</div>
+				<div class="col-lg-4  m-0 p-0 flex-grow" style="margin-bottom: 30px;">
+					<div class="shadow-sm  p-4 bg-white h-100" style="border-radius: 12px;">
+						<div class="d-flex align-items-center justify-content-between">
+							<h3 class="text-primary fw-bold">
+								Top Distributors
+							</h3>
+						</div>
+						<ChartRenderer type="'pie'" data="state.topFranchises.franchiseData" />
+						<p class="text-muted d-flex justify-content-center text-center text-wrap m-0">
+							<span t-out="state.topFranchises.message"/>
+						</p>
+					</div>
+				</div>
+			</div>
+			<!-- <div class="col-lg-3 m-0 p-0 flex-grow">
+				<div class="shadow-sm mx-2 p-4 bg-white h-100" style="border-radius: 12px;">
+					<div class="d-flex align-items-center justify-content-between">
+						<h3 class="text-primary fw-bold">
+							Current Month's Revenue
+						</h3>
+					</div>
+					<ChartRenderer type="'polarArea'" data="state.revenue.monthlyRevenue" />
+						<p class="text-muted d-flex justify-content-center text-center text-wrap m-0"><span
+			t-out="state.revenue.message"/></p>
+				</div>
+			</div> -->
+
+			<!-- <div class="row mx-1 p-2 py-1  mt-10 " style="margin-bottom: 100px;">
+				<div class="col-lg-6 m-0 p-0">
+						<div class="shadow-sm mx-2 p-4 bg-white h-100" style="border-radius: 12px;">
+						<div class="d-flex align-items-center justify-content-between">
+							<h3 class="text-primary fw-bold">
+							Yearly Revenue
+							</h3> -->
+			<!-- <div class="px-3 py-1 bg-primary cursor-pointer">
+								<span class="fa fa-arrow-right text-white"/>
+							</div> -->
+			<!-- </div>
+						<div class="chart-container">
+    					<ChartRenderer type="'bar'" data="state.yearlyRevenue.yearlyRevenueData" />
+							<p class="text-muted d-flex justify-content-center text-center text-wrap m-0"><span
+			t-out="state.yearlyRevenue.message"/></p>
+						</div>
+					</div>
+				</div> -->
+
+			<!-- <div class="col-lg-6 m-0 p-0">
+						<div class="shadow-sm mx-2 p-4 bg-white h-100 " style="border-radius: 12px;">
+						<div class="d-flex align-items-center justify-content-between">
+							<h3 class="text-primary fw-bold">
+							Geo Distribution
+							</h3> -->
+			<!-- <div class="px-3 py-1 bg-primary cursor-pointer">
+								<span class="fa fa-arrow-right text-white"/>
+							</div> -->
+			<!-- </div>
+						<div class="chart-container">
+    					<ChartRenderer type="'line'" data="state.geo.regionDistribution" />
+							<p class="text-muted d-flex justify-content-center text-center text-wrap m-0"><span
+			t-out="state.geo.message"/></p>
+						</div>
+					</div>
+				</div>
+			</div> -->
+		</div>
+
+
+	</t>
+
+</templates>

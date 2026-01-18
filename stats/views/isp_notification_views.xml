@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- View isp.notification View Tree -->
+    <record id="view_isp_notification_tree" model="ir.ui.view">
+        <field name="name">view.isp.notification.tree</field>
+        <field name="model">isp.notification</field>
+        <field name="arch" type="xml">
+            <tree string="Messages">
+                <field name="name" />
+                <field name="heading_eng" />
+                <field name="heading_urdu" />
+                <field name="message_english" />
+                <field name="message_urdu" />
+                <field name="publish" widget="boolean_toggle" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- View isp.notification form -->
+    <record id="view_isp_notification_form" model="ir.ui.view">
+        <field name="name">view.isp.notification.form</field>
+        <field name="model">isp.notification</field>
+        <field name="arch" type="xml">
+            <form string="Isp Notification">
+                <sheet>
+                    <group colspan="2">
+                        <field name="name" placeholder="Enter Title" />
+                    </group>
+                    <group>
+                        <group colspan="2">
+                            <field name="heading_eng" />
+                            <field name="message_english" widget="html" />
+                        </group>
+                        <group colspan="2">
+                            <field name="heading_urdu" />
+                            <field name="message_urdu" widget="html" />
+                        </group>
+                    </group>
+                    <group>
+                        <field name="publish" />
+                    </group>
+                    <group>
+                        <field name="body" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- Action isp.notification -->
+    <record id="action_isp_notification" model="ir.actions.act_window">
+        <field name="name">Isp Notification</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">isp.notification</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                There is no examples click here to add new Isp Notification.
+            </p>
+        </field>
+    </record>
+
+
+    <menuitem
+        id="menu_isp_notification"
+        name="Notifications"
+        parent="menu_stats_root"
+        action="action_isp_notification"
+        groups="base_security_groups.group_admin"
+        sequence="12" />
+
+</odoo>

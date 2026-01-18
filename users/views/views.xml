@@ -98,12 +98,12 @@
                                 onmouseover="this.classList.add('shadow-sm')"
                                 onmouseout="this.classList.remove('shadow-sm')">
 
-                                <div class="d-flex justify-content-between text-wrap">
+                                <div class="d-flex p-3 justify-content-between text-wrap">
                                     <h5 class="card-title text-muted">Current Status</h5>
                                     <i class="fa fa-heartbeat pb-1 text-info"
                                         title="Current Status" />
                                 </div>
-                                <h2 class="card-subtitle" style="margin: 0; padding: 0;">
+                                <h2 class="card-subtitle p-3" style="margin: 0;">
                                     <field name="current_status" readonly="1"
                                         style="border: none !important"
                                         decoration-info="current_status == 'unknown'"
@@ -115,16 +115,16 @@
                             </div>
 
 
-                             <div class="card-body m-2 rounded-3 border border-secondary
+                             <div class="card-body  m-2 rounded-3 border border-secondary
                             bg-light"
                                 onmouseover="this.classList.add('shadow-sm')"
                                 onmouseout="this.classList.remove('shadow-sm')">
-                                <div class="d-flex justify-content-between text-wrap">
+                                <div class="d-flex p-3 justify-content-between text-wrap">
                                     <h5 class="card-title text-muted">Activation State</h5>
                                     <i class="fa  fa-bullseye pb-1 text-info"
                                         title="Activation State" />
                                 </div>
-                                <h2 class="card-subtitle" style="margin: 0; padding: 0;">
+                                <h2 class="card-subtitle p-3" style="margin: 0; padding: 0;">
                                     <field name="activation_status" readonly="1"
                                         style="border: none !important"
                                         decoration-info="activation_status == 'unknown'"
@@ -137,11 +137,11 @@
                             <div class="card-body m-2 rounded-3 border border-secondary bg-light"
                                 onmouseover="this.classList.add('shadow-sm')"
                                 onmouseout="this.classList.remove('shadow-sm')">
-                                <div class="d-flex justify-content-between text-wrap">
+                                <div class="d-flex p-3 justify-content-between text-wrap">
                                     <h5 class="card-title text-muted">Connection State</h5>
                                     <i class="fa fa-wifi pb-1 text-info" title="Connection State" />
                                 </div>
-                                <h2 class="card-subtitle" style="margin: 0; padding: 0;">
+                                <h2 class="card-subtitle p-3" style="margin: 0; padding: 0;">
                                     <field name="conection_status" readonly="1"
                                         style="border: none !important"
                                         decoration-danger="conection_status == 'expired'"
@@ -153,11 +153,11 @@
                             <div class="card-body m-2 rounded-3 border border-secondary bg-light"
                                 onmouseover="this.classList.add('shadow-sm')"
                                 onmouseout="this.classList.remove('shadow-sm')">
-                                <div class="d-flex justify-content-between text-wrap">
+                                <div class="d-flex p-3 justify-content-between text-wrap">
                                     <h5 class="card-title text-muted">Session Uptime</h5>
                                     <i class="fa  fa-arrow-up pb-1 text-info" title="Uptime" />
                                 </div>
-                                <h2 class="card-subtitle text-info" style="margin: 0; padding: 0;">
+                                <h2 class="card-subtitle p-3 text-info" style="margin: 0; padding: 0;">
                                     <field name="uptime"
                                         style="border: none
                                     !important" />
@@ -187,7 +187,7 @@
                                 title="Mac Address"
                                 onmouseover="this.classList.add('bg-info', 'text-white')"
                                 onmouseout="this.classList.remove('bg-info', 'text-white')"
-                                class="oe_highlight btn btn-light m-2 flex-fill"
+                                class="oe_highlight btn btn-secondary m-2 flex-fill"
                                 role="button"
                                 confirm="Do you want to Release Media Access Control (MAC) Address?"
                                 confirm-label="Release MAC"
@@ -200,7 +200,7 @@
                                 invisible="is_disable"
                                 onmouseover="this.classList.add('bg-info', 'text-white')"
                                 onmouseout="this.classList.remove('bg-info', 'text-white')"
-                                class="oe_highlight btn btn-light m-2 flex-fill"
+                                class="oe_highlight btn btn-secondary m-2 flex-fill"
                                 role="button"
                                 confirm="Do you want to Disable this User?"
                                 confirm-label="Disable User"
@@ -213,7 +213,7 @@
                                 invisible="not is_disable"
                                 onmouseover="this.classList.add('bg-info', 'text-white')"
                                 onmouseout="this.classList.remove('bg-info', 'text-white')"
-                                class="oe_highlight btn btn-light m-2 flex-fill"
+                                class="oe_highlight btn btn-secondary m-2 flex-fill"
                                 role="button"
                                 confirm="Do you want to Enable this User?"
                                 confirm-label="Enable User"
@@ -225,7 +225,7 @@
                                 title="Password"
                                 onmouseover="this.classList.add('bg-info', 'text-white')"
                                 onmouseout="this.classList.remove('bg-info', 'text-white')"
-                                class="oe_highlight btn btn-light m-2 flex-fill"
+                                class="oe_highlight btn btn-secondary m-2 flex-fill"
                                 role="button"
                                 icon="fa-key"
                                 confirm="Do you want to edit password?"
@@ -242,7 +242,7 @@
                                 title="Edit Profile"
                                 onmouseover="this.classList.add('bg-info', 'text-white')"
                                 onmouseout="this.classList.remove('bg-info', 'text-white')"
-                                class="oe_highlight btn btn-light m-2 flex-fill"
+                                class="oe_highlight btn btn-secondary m-2 flex-fill"
                                 role="button"
                                 icon="fa-user"
                                 context="{
@@ -258,7 +258,7 @@
                                 title="Edit Vlan"
                                 onmouseover="this.classList.add('bg-info', 'text-white')"
                                 onmouseout="this.classList.remove('bg-info', 'text-white')"
-                                class="oe_highlight btn btn-light m-2 flex-fill"
+                                class="oe_highlight btn btn-secondary m-2 flex-fill"
                                 role="button"
                                 icon="fa-sitemap"
                                 confirm="Do you want to edit vlan?"
@@ -293,7 +293,7 @@
                                 invisible="conection_status == 'active'"
                                 onmouseover="this.classList.add('bg-info', 'text-white')"
                                 onmouseout="this.classList.remove('bg-info', 'text-white')"
-                                class="oe_highlight btn btn-light m-2 flex-fill"
+                                class="oe_highlight btn btn-secondary m-2 flex-fill"
                                 role="button"
                                 icon="fa-cube"
                                 context="{
@@ -323,7 +323,7 @@
                                 title="Refresh"
                                 onmouseover="this.classList.add('bg-danger', 'text-white')"
                                 onmouseout="this.classList.remove('bg-danger', 'text-white')"
-                                class="oe_highlight btn btn-light m-2 flex-fill"
+                                class="oe_highlight btn btn-secondary m-2 flex-fill"
                                 role="button"
                                 icon="fa-refresh"
                                 confirm="Are you sure you want to refresh this user's connection? This will disconnect their current session." />
@@ -347,6 +347,7 @@
                                         aria-labelledby="headingUserDetails">
                                         <div class="accordion-body">
                                              <div
+                                                     invisible="package_id"
                                                 class="float-end text-danger">
                                                 <i class="fa fa-exclamation-triangle" /> Issues with
                                                 Record Health</div>
@@ -359,7 +360,7 @@
 <!--                                                invisible="distributor_id != package_distributor"-->
 <!--                                                class="float-end text-muted">-->
 <!--                                                <i class="fa fa-check-circle" /> Record Health 100% </div>-->
-                                            <div
+                                            <div invisible="not package_id"
                                                 class="float-end text-muted">
                                                 <i class="fa fa-check-circle" /> Record Health 100% </div>
 
@@ -380,17 +381,17 @@
                                                 <tbody>
 
 
-                                                    <tr>
-                                                        <td>
-                                                            Distributor</td>
-                                                        <td>
-<!--                                                            <field name="distributor_id"-->
-<!--                                                                readonly="1"-->
-<!--                                                                options="{'no_open': True, 'no_create': True, 'no_create_edit': True}"-->
-<!--                                                            />-->
-                                                        </td>
+<!--                                                    <tr>-->
+<!--                                                        <td>-->
+<!--                                                            Distributor</td>-->
+<!--                                                        <td>-->
+<!--&lt;!&ndash;                                                            <field name="distributor_id"&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                readonly="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                options="{'no_open': True, 'no_create': True, 'no_create_edit': True}"&ndash;&gt;-->
+<!--&lt;!&ndash;                                                            />&ndash;&gt;-->
+<!--                                                        </td>-->
 
-                                                    </tr>
+<!--                                                    </tr>-->
 
                                                     <tr>
                                                         <td>
@@ -628,7 +629,8 @@
                         </section>
                     </section>
 
-                    <group>
+                    <group invisible="radusergroup_id">
+
                         <group>
 <!--                            <field name="distributor_id"-->
 <!--                                readonly="distributor_id" force_save="1"-->
@@ -644,6 +646,7 @@
                             <field name="id_subscription"/>
                             <field name="id_address"/>
                             <field name="opportunity_id"/>
+                            <field name="company_id" readonly="1"/>
                         </group>
 
                         <group>

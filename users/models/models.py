@@ -35,6 +35,7 @@ class Users(models.Model):
     id_subscription = fields.Char(string="Subscription id" ,readonly=True)
     id_address = fields.Char(string="ID Address",readonly=True)
     opportunity_id = fields.Many2one('crm.lead', string='Opportunity', readonly=True)
+    company_id = fields.Many2one('res.company', string='Company', required=True, default=lambda self: self.env.company)
 
 
     # distributor_id = fields.Many2one(
