@@ -13,7 +13,7 @@ class UpdateUserProfile(models.TransientModel):
     _description = 'User Profile'
 
     user_id = fields.Many2one('users', string="User")
-    distributor_id = fields.Many2one(related="user_id.distributor_id", string="Distributor")
+    # distributor_id = fields.Many2one(related="user_id.distributor_id", string="Distributor")
     name = fields.Char("Name")
     email = fields.Char(string="Email",)
     mobile = fields.Char(string="Mobile",)
@@ -39,11 +39,11 @@ class UpdateUserProfile(models.TransientModel):
                 record.new_address = record.user_id.address
 
                 
-    def check_access(self):
-        if not self.env.user.has_group('base_security_groups.group_admin'):
-            if self.env.user.distributor_id.id != self.distributor_id.id:
-                raise UserError(_("⛔ Sorry superhero, your powers don't work here! Only admins have the special cape for this. 🦸‍♂️"))
-        return True
+    # def check_access(self):
+    #     if not self.env.user.has_group('base_security_groups.group_admin'):
+    #         if self.env.user.distributor_id.id != self.distributor_id.id:
+    #             raise UserError(_("⛔ Sorry superhero, your powers don't work here! Only admins have the special cape for this. 🦸‍♂️"))
+    #     return True
                 
     # @api.constrains("new_email")
     # def _check_email(self):

@@ -26,27 +26,28 @@ class UpdateUserProfile(models.TransientModel):
     
     # expiry_date = fields.Datetime(realted="user_id.expiry_date", string="Expiry Date")
 
-    package_id = fields.Many2one("package.line", string="Package")
+    package_id = fields.Many2one("product.product", string="Package")
     releated_nas_id = fields.Many2one("nas", string="Related Nas Id")
-    distributor_id = fields.Many2one("distributors", string="Distributor")
+    # distributor_id = fields.Many2one("distributors", string="Distributor")
 
-    field_value = fields.Many2one("package.line", domain="[('dealer_id', '=', distributor_id )]", string="New Value")
+    field_value = fields.Many2one("package.line", string="New Value")
     field_value_nas_id = fields.Many2one("nas", string="Nas Id")
     
     
-    def check_access(self):
-        if not self.env.user.has_group('base_security_groups.group_admin'):
-            if self.env.user.distributor_id.id != self.distributor_id.id:
-                raise UserError(_("⛔ Sorry superhero, your powers don't work here! Only admins have the special cape for this. 🦸‍♂️"))
-        return True
+    # def check_access(self):
+    #     if not self.env.user.has_group('base_security_groups.group_admin'):
+    #         if self.env.user.distributor_id.id != self.distributor_id.id:
+    #             raise UserError(_("⛔ Sorry superhero, your powers don't work here! Only admins have the special cape for this. 🦸‍♂️"))
+    #     return True
     
     
     @api.onchange('field_value')
     def _compute_field_value_nas_id(self):
         for record in self:
             if record.field_value:
+                print('test 65432')
                 #record.field_value_nas_id = record.field_value.package_id.nas_id.id
-                record.field_value_nas_id = record.distributor_id.nas_id.id
+                # record.field_value_nas_id = record.distributor_id.nas_id.id
                 
     
     @api.onchange('user_id')
@@ -54,9 +55,9 @@ class UpdateUserProfile(models.TransientModel):
         for record in self:
             if record.user_id:
                 record.package_id = record.user_id.package_id
-                record.distributor_id = record.user_id.distributor_id.id
+                # record.distributor_id = record.user_id.distributor_id.id
                 #record.releated_nas_id = record.package_id.package_id.nas_id.id
-                record.releated_nas_id = record.distributor_id.nas_id.id
+                # record.releated_nas_id = record.distributor_id.nas_id.id
                 
                 
     def action_update_package(self):

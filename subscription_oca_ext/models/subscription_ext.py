@@ -33,6 +33,7 @@ class SaleSubscription(models.Model):
                     'email': record.partner_id.email,
                     'mobile': record.partner_id.mobile,
                     'address': record.delivery_address(),
+                    'package_id':record.opportunity_id.data_package_id.id if record.opportunity_id.data_package_id else False,
                     'id_subscription': recrd_id,
                     'opportunity_id': record.opportunity_id.id if record.opportunity_id else False,
                 })

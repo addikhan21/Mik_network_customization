@@ -1,0 +1,762 @@
+.card_user_count {
+    position: relative; /* To position the decorative icon */
+    flex-grow: 1;
+    border-radius: 12px;
+    padding: 20px;
+    flex-wrap: wrap;
+    font-family: Helvetica, sans-serif;
+    margin: 10px;
+    color: #000; /* Default text color */
+    background-color: var(--card-color); /* Dynamic background color */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+    overflow: hidden; /* To ensure the decorative icon doesn't spill outside the card */
+}
+
+.card_user_count .icon {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--icon-color); /* Dynamic icon background color */
+    color: white; /* Default icon text color */
+    font-size: 20px;
+    margin-bottom: 15px;
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+}
+
+.card_user_count .number {
+    font-size: 30px;
+    font-weight: bold;
+    margin: 0;
+    transition: color 0.3s; /* Smooth transition */
+}
+
+.card_user_count .label {
+    font-size: 15px;
+    margin: 5px 0;
+    transition: color 0.3s; /* Smooth transition */
+}
+
+.card_user_count::after {
+    font-family: "FontAwesome"; /* Required for FontAwesome icons */
+    font-size: 120px; /* Enlarged size */
+    opacity: 0.1;
+    position: absolute;
+    flex-wrap: wrap;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: inherit; /* Same color as the .icon */
+    z-index: 0;
+    width: 1em;
+    height: 1em;
+    background: inherit;
+}
+
+/* Hover Effect */
+.card_user_count:hover {
+    background-color: var(--icon-color); /* Swap card background with icon color */
+    color: white; /* Change text color to white */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card_user_count:hover .icon {
+    background-color: var(--icon-color); /* Ensure icon matches new card background */
+    color: white; /* Keep icon text color white */
+}
+
+.card_user_count:hover .number,
+.card_user_count:hover .label {
+    color: white; /* Change text to white */
+}
+
+/* Unique Colors for Each Card */
+.card_user_count:nth-child(1) {
+    --card-color: rgba(75, 192, 192, 0.3); /* Teal with Light Opacity */
+    --icon-color: rgba(75, 192, 192, 1);   /* Teal Solid */
+}
+
+.card_user_count:nth-child(2) {
+    --card-color: rgba(54, 162, 235, 0.3); /* Light Blue with Opacity */
+    --icon-color: rgba(54, 162, 235, 1);   /* Blue Solid */
+}
+
+.card_user_count:nth-child(3) {
+    --card-color: rgba(252, 150, 207, 0.3); /* Green with Light Opacity */
+    --icon-color: rgb(252, 150, 207);   /* Green Solid */
+}
+
+.card_user_count:nth-child(4) {
+    --card-color: rgba(255, 206, 86, 0.3); /* Yellow with Opacity */
+    --icon-color: rgba(255, 206, 86, 1);   /* Yellow Solid */
+}
+
+.card_user_count:nth-child(5) {
+    --card-color: rgba(255, 99, 132, 0.3); /* Light Pink/Red with Opacity */
+    --icon-color: rgba(255, 99, 132, 1);   /* Pink/Red Solid */
+}
+
+.card_user_count:nth-child(6) {
+    --card-color: rgba(153, 102, 255, 0.3); /* Light Purple with Opacity */
+    --icon-color: rgba(153, 102, 255, 1);   /* Purple Solid */
+}
+
+
+
+.section-title {
+    font-size: 28px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: #5c5b5b;
+    // text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 20px;
+    // border-left: 4px solid #007bff;
+    padding-left: 12px;
+    line-height: 1.2;
+}
+
+.section-subtitle {
+    font-size: 12px; /* Smaller than the title */
+    font-family: 'Poppins', sans-serif;
+    color: #5c5b5b; /* Muted gray for subtitle */
+    font-weight: 400; /* Lighter weight for subtitle */
+    margin-top: 5px; /* Remove top margin */
+    padding-left: 12px;
+}
+
+h2, h5 {
+    margin: 0; /* Remove default margins */
+}
+
+.o_dashboard_loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.9);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .o_loading_indicator {
+        text-align: center;
+
+        .o_loading_text {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            color: #007bff;
+        }
+    }
+}
+
+.card_user_count {
+    position: relative;
+    overflow: hidden;
+
+    .bg-icon {
+        position: absolute;
+        right: -10px;
+        bottom: -10px;
+        opacity: 0.1;
+        transform: rotate(-15deg);
+        transition: all 0.3s ease-in-out;
+        color: #000;
+        z-index: 0;
+        font-size: 35px;
+    }
+    &:hover {
+        .bg-icon {
+            opacity: 0;
+            transform: rotate(-15deg) scale(4) translateY(20px);
+            color: #ffffff;
+        }}
+
+    .icon, .number, .label {
+        position: relative;
+        z-index: 1;
+    }
+}
+
+
+
+// _________________--
+/* Add this to your component's CSS file */
+.sidebar {
+    transition: all 0.3s ease;
+}
+
+// .nav-item:hover {
+//     background-color: #f8f9fa !important;
+// }
+
+
+
+// .nav-item.active {
+//     background-color: #e8f5e8 !important;
+// }
+
+
+.avatar {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.team-members .p-2:hover {
+    background-color: #e9ecef !important;
+}
+
+.main-content {
+    min-height: 100vh;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        display: none;
+    }
+}
+
+/* Add this CSS */
+.sidebar-fixed {
+    width: 250px !important;
+    min-width: 250px !important;
+    max-width: 250px !important;
+    flex-shrink: 0 !important;
+}
+
+/* Add this to your CSS file */
+.event-item {
+    transition: all 0.2s ease;
+    border-left: 4px solid #0d6efd !important;
+}
+
+.event-item:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+}
+
+.time-column {
+    border-right: 1px solid #dee2e6;
+    padding-right: 1rem;
+}
+
+.attendees .badge {
+    font-size: 0.7rem;
+}
+
+.events-list {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+
+/* Financial Tab Custom Styles */
+.financial-overview-container {
+    background: #f8f9fa;
+}
+
+.financial-header-section h2 {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.financial-metrics-grid {
+    animation: fadeInUp 0.5s ease;
+}
+
+.financial-metric-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: rgb(255, 255, 255);
+    border: 1px solid #e9ecef !important;
+    cursor: pointer;
+}
+
+.financial-metric-card:hover {
+    // transform: translateY(-6px);
+    // box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12) !important;
+}
+
+.metric-icon-wrapper {
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+}
+
+.financial-metric-card:hover .metric-icon-wrapper {
+    transform: scale(1.1);
+}
+
+.icon-bg-primary {
+    background-color: rgba(13, 110, 253, 0.1);
+}
+
+.icon-bg-secondary {
+    background-color: rgba(219, 218, 218, 0.243);
+}
+
+.icon-bg-success {
+    background-color: rgba(25, 135, 84, 0.1);
+}
+
+.icon-bg-info {
+    background-color: rgba(13, 202, 240, 0.1);
+}
+
+.icon-bg-warning {
+    background-color: rgba(255, 193, 7, 0.1);
+}
+
+.icon-bg-danger {
+    background-color: rgba(220, 53, 69, 0.1);
+}
+
+.metric-card-title {
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.metric-value {
+    font-size: 2rem;
+    line-height: 1.2;
+    font-weight: 700;
+}
+
+.metric-description {
+    font-size: 0.813rem;
+    opacity: 0.8;
+}
+
+.financial-loader {
+    width: 3rem;
+    height: 3rem;
+}
+
+.financial-error-alert {
+    border-radius: 10px;
+    padding: 1.5rem;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .metric-value {
+        font-size: 1.75rem;
+    }
+}
+
+
+//
+
+/* Add hover effects */
+.nav-link1 {
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-link1:hover {
+    background-color: rgba(13, 110, 253, 0.08) !important;
+    transform: translateX(4px);
+}
+
+.nav-link1.active {
+    background-color: rgba(139, 115, 178, 1) !important;
+    font-weight: 600;
+}
+
+.nav-link1.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background-color: var(--bs-primary);
+}
+
+.sidebar {
+    transition: width 0.3s ease;
+}
+
+.transition-all {
+    transition: all 0.3s ease;
+}
+
+
+
+/* ...existing code... */
+
+/* Business Intelligence Dashboard Specific Styles */
+
+/* Hover effect for BI metric cards */
+.financial-metric-card:hover {
+    border-color: #a3a6a9 !important;
+}
+
+/* Badge styles for BI dashboard */
+.badge {
+    font-weight: 500;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 12px;
+}
+
+/* Alert styles for error messages */
+.alert {
+    border-left: 4px solid;
+}
+
+.alert-danger {
+    border-left-color: #dc3545;
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* Spinner/Loading styles */
+.spinner-border {
+    border-width: 0.3em;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Quick actions button hover effects */
+.btn-outline-primary:hover,
+.btn-outline-info:hover,
+.btn-outline-success:hover,
+.btn-outline-danger:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+/* Metric value animation */
+.metric-value {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Card body padding for BI cards */
+.financial-metric-card .card-body {
+    position: relative;
+    z-index: 1;
+}
+
+/* Icon wrapper animation on card hover */
+.financial-metric-card:hover .metric-icon-wrapper i {
+    animation: pulse 0.6s ease;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+/* Badge icon alignment */
+.badge i {
+    vertical-align: middle;
+    margin-right: 4px;
+}
+
+/* Loading state overlay */
+.text-center.py-5 {
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Header section spacing */
+.header-section {
+    margin-bottom: 2rem;
+}
+
+.header-section h2 i {
+    vertical-align: middle;
+}
+
+/* Refresh button styles */
+.btn-outline-primary.btn-sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    border-width: 2px;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-primary.btn-sm:hover {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    color: white;
+}
+
+/* Row gap spacing */
+.row.g-4 {
+    margin-left: -0.75rem;
+    margin-right: -0.75rem;
+}
+
+.row.g-4 > * {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+
+/* Cursor pointer utility */
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* Full width layout */
+.col-lg-12 .financial-metric-card {
+    min-height: auto;
+}
+
+/* Last updated timestamp styling */
+.text-muted .fa-clock-o {
+    font-size: 0.9em;
+}
+
+/* Quick Actions section title */
+.card-body h5 {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.card-body h5 i {
+    vertical-align: middle;
+}
+
+/* Badge spacing in metrics */
+.badge + .badge {
+    margin-left: 0.5rem;
+}
+
+/* Metric description icon alignment */
+.metric-description i {
+    font-size: 0.875rem;
+    opacity: 0.7;
+}
+
+/* Error alert icon sizing */
+.alert-danger .fa-exclamation-triangle {
+    font-size: 1.5rem;
+}
+
+/* Responsive adjustments for BI dashboard */
+@media (max-width: 768px) {
+    .metric-value {
+        font-size: 1.75rem;
+    }
+
+    .metric-icon-wrapper {
+        width: 40px !important;
+        height: 40px !important;
+    }
+
+    .metric-icon-wrapper i {
+        font-size: 1rem !important;
+    }
+
+    .badge {
+        font-size: 0.7rem;
+        padding: 4px 8px;
+    }
+}
+
+/* Small text styling */
+.small {
+    font-size: 0.875rem;
+}
+
+/* Gap utilities */
+.gap-2 {
+    gap: 0.5rem !important;
+}
+
+.gap-3 {
+    gap: 1rem !important;
+}
+
+/* Flex wrap utility */
+.flex-wrap {
+    flex-wrap: wrap !important;
+}
+
+/* Justify content end */
+.justify-content-md-end {
+    justify-content: flex-end !important;
+}
+
+@media (max-width: 767.98px) {
+    .justify-content-md-end {
+        justify-content: flex-start !important;
+    }
+}
+
+/* Icon background variants not in original file */
+.icon-bg-warning {
+    background-color: rgba(255, 193, 7, 0.1);
+}
+
+/* Card shadow on hover - specific to BI cards */
+.financial-metric-card {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+/* Metric card title uppercase variant */
+.metric-card-title {
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Loading spinner color variants */
+.spinner-border.text-primary {
+    color: #0d6efd !important;
+}
+
+/* Button group spacing for quick actions */
+.col-md-3 .btn {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Fade show active state */
+.tab-pane.fade.show.active {
+    animation: fadeInContent 0.3s ease;
+}
+
+@keyframes fadeInContent {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Alert body content spacing */
+.alert .d-flex > div {
+    flex: 1;
+}
+
+/* Metric icon wrapper sizing consistency */
+.metric-icon-wrapper.rounded-circle {
+    min-width: 50px;
+    min-height: 50px;
+}
+
+
+/* ...existing code... */
+
+/* Navigation Link Styling - Remove Bootstrap defaults */
+.nav-link1 {
+    position: relative;
+    overflow: hidden;
+    border: none !important;
+    background-color: transparent !important;
+    color: #6c757d; /* Default text color */
+    transition: all 0.3s ease;
+}
+
+.nav-link1:hover {
+    background-color: rgba(139, 115, 178, 0.1) !important;
+    transform: translateX(4px);
+    border: none !important;
+    color: rgba(139, 115, 178, 1);
+}
+
+.nav-link1.active {
+    background-color: rgba(139, 115, 178, 0.15) !important;
+    font-weight: 600;
+    border: none !important;
+    color: rgba(139, 115, 178, 1) !important;
+}
+
+.nav-link1.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background-color: rgba(139, 115, 178, 1);
+}
+
+/* Remove focus outline */
+.nav-link1:focus,
+.nav-link1:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    background-color: transparent !important;
+}
+
+/* Override Bootstrap nav-pills defaults */
+.nav-pills .nav-link1 {
+    border-radius: 8px;
+    border: none !important;
+    background: none !important;
+    padding: 0.75rem 1rem;
+}
+
+.nav-pills .nav-link1:not(.active) {
+    background-color: transparent !important;
+    color: #6c757d;
+}
+
+.nav-pills .nav-link1.active {
+    background-color: rgba(139, 115, 178, 0.15) !important;
+    color: rgba(139, 115, 178, 1) !important;
+}
+
+/* Logout button special styling */
+.nav-link1.text-danger {
+    color: #dc3545 !important;
+}
+
+.nav-link1.text-danger:hover {
+    background-color: rgba(220, 53, 69, 0.1) !important;
+    color: #dc3545 !important;
+}
+

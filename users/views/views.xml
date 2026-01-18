@@ -17,7 +17,7 @@
                 <field name="expiry_date_char" />
                 <!-- <field name="distributor_type" /> -->
                 <field name="address" />
-                <field name="distributor_id" optional="hide" />
+<!--                <field name="distributor_id" optional="hide" />-->
                 <field name="mobile" optional="hide" />
 
             </list>
@@ -53,7 +53,7 @@
                     <field name="expiry_date" invisible="1" />
                     <field name="radusergroup_id" invisible="1" />
                     <field name="can_access" invisible="1" />
-                    <field name="package_distributor" invisible="1" />
+<!--                    <field name="package_distributor" invisible="1" />-->
                     <field name="is_disable" invisible="1" />
                     <field name="conection_status" invisible="1" />
 
@@ -98,12 +98,12 @@
                                 onmouseover="this.classList.add('shadow-sm')"
                                 onmouseout="this.classList.remove('shadow-sm')">
 
-                                <div class="d-flex justify-content-between text-wrap">
+                                <div class="d-flex p-3 justify-content-between text-wrap">
                                     <h5 class="card-title text-muted">Current Status</h5>
                                     <i class="fa fa-heartbeat pb-1 text-info"
                                         title="Current Status" />
                                 </div>
-                                <h2 class="card-subtitle" style="margin: 0; padding: 0;">
+                                <h2 class="card-subtitle p-3" style="margin: 0;">
                                     <field name="current_status" readonly="1"
                                         style="border: none !important"
                                         decoration-info="current_status == 'unknown'"
@@ -115,33 +115,33 @@
                             </div>
 
 
-                            <!-- <div class="card-body m-2 rounded-3 border border-secondary
+                             <div class="card-body  m-2 rounded-3 border border-secondary
                             bg-light"
                                 onmouseover="this.classList.add('shadow-sm')"
                                 onmouseout="this.classList.remove('shadow-sm')">
-                                <div class="d-flex justify-content-between text-wrap">
+                                <div class="d-flex p-3 justify-content-between text-wrap">
                                     <h5 class="card-title text-muted">Activation State</h5>
                                     <i class="fa  fa-bullseye pb-1 text-info"
                                         title="Activation State" />
                                 </div>
-                                <h2 class="card-subtitle" style="margin: 0; padding: 0;">
+                                <h2 class="card-subtitle p-3" style="margin: 0; padding: 0;">
                                     <field name="activation_status" readonly="1"
                                         style="border: none !important"
                                         decoration-info="activation_status == 'unknown'"
                                         decoration-danger="activation_status == 'inactive'"
                                         decoration-success="activation_status == 'active'" />
                                 </h2>
-                            </div> -->
+                            </div>
 
 
                             <div class="card-body m-2 rounded-3 border border-secondary bg-light"
                                 onmouseover="this.classList.add('shadow-sm')"
                                 onmouseout="this.classList.remove('shadow-sm')">
-                                <div class="d-flex justify-content-between text-wrap">
+                                <div class="d-flex p-3 justify-content-between text-wrap">
                                     <h5 class="card-title text-muted">Connection State</h5>
                                     <i class="fa fa-wifi pb-1 text-info" title="Connection State" />
                                 </div>
-                                <h2 class="card-subtitle" style="margin: 0; padding: 0;">
+                                <h2 class="card-subtitle p-3" style="margin: 0; padding: 0;">
                                     <field name="conection_status" readonly="1"
                                         style="border: none !important"
                                         decoration-danger="conection_status == 'expired'"
@@ -153,11 +153,11 @@
                             <div class="card-body m-2 rounded-3 border border-secondary bg-light"
                                 onmouseover="this.classList.add('shadow-sm')"
                                 onmouseout="this.classList.remove('shadow-sm')">
-                                <div class="d-flex justify-content-between text-wrap">
+                                <div class="d-flex p-3 justify-content-between text-wrap">
                                     <h5 class="card-title text-muted">Session Uptime</h5>
                                     <i class="fa  fa-arrow-up pb-1 text-info" title="Uptime" />
                                 </div>
-                                <h2 class="card-subtitle text-info" style="margin: 0; padding: 0;">
+                                <h2 class="card-subtitle p-3 text-info" style="margin: 0; padding: 0;">
                                     <field name="uptime"
                                         style="border: none
                                     !important" />
@@ -187,7 +187,7 @@
                                 title="Mac Address"
                                 onmouseover="this.classList.add('bg-info', 'text-white')"
                                 onmouseout="this.classList.remove('bg-info', 'text-white')"
-                                class="oe_highlight btn btn-light m-2 flex-fill"
+                                class="oe_highlight btn btn-secondary m-2 flex-fill"
                                 role="button"
                                 confirm="Do you want to Release Media Access Control (MAC) Address?"
                                 confirm-label="Release MAC"
@@ -200,7 +200,7 @@
                                 invisible="is_disable"
                                 onmouseover="this.classList.add('bg-info', 'text-white')"
                                 onmouseout="this.classList.remove('bg-info', 'text-white')"
-                                class="oe_highlight btn btn-light m-2 flex-fill"
+                                class="oe_highlight btn btn-secondary m-2 flex-fill"
                                 role="button"
                                 confirm="Do you want to Disable this User?"
                                 confirm-label="Disable User"
@@ -213,7 +213,7 @@
                                 invisible="not is_disable"
                                 onmouseover="this.classList.add('bg-info', 'text-white')"
                                 onmouseout="this.classList.remove('bg-info', 'text-white')"
-                                class="oe_highlight btn btn-light m-2 flex-fill"
+                                class="oe_highlight btn btn-secondary m-2 flex-fill"
                                 role="button"
                                 confirm="Do you want to Enable this User?"
                                 confirm-label="Enable User"
@@ -225,7 +225,7 @@
                                 title="Password"
                                 onmouseover="this.classList.add('bg-info', 'text-white')"
                                 onmouseout="this.classList.remove('bg-info', 'text-white')"
-                                class="oe_highlight btn btn-light m-2 flex-fill"
+                                class="oe_highlight btn btn-secondary m-2 flex-fill"
                                 role="button"
                                 icon="fa-key"
                                 confirm="Do you want to edit password?"
@@ -236,22 +236,38 @@
                                 }" />
 
 
-<!--                            <button name="%(action_users_profile_wizard)d"-->
-<!--                                string="Edit Profile"-->
-<!--                                type="action"-->
-<!--                                title="Edit Profile"-->
-<!--                                onmouseover="this.classList.add('bg-info', 'text-white')"-->
-<!--                                onmouseout="this.classList.remove('bg-info', 'text-white')"-->
-<!--                                class="oe_highlight btn btn-light m-2 flex-fill"-->
-<!--                                role="button"-->
-<!--                                icon="fa-user"-->
-<!--                                context="{-->
-<!--                                    'default_user_id': active_id,-->
-<!--                                }"-->
-<!--                                confirm="Do you want to edit profile?"-->
-<!--                                confirm-label="Edit Profile"-->
-<!--                            />-->
+                            <button name="%(action_users_profile_wizard)d"
+                                string="Edit Profile"
+                                type="action"
+                                title="Edit Profile"
+                                onmouseover="this.classList.add('bg-info', 'text-white')"
+                                onmouseout="this.classList.remove('bg-info', 'text-white')"
+                                class="oe_highlight btn btn-secondary m-2 flex-fill"
+                                role="button"
+                                icon="fa-user"
+                                context="{
+                                    'default_user_id': id,
+                                }"
+                                confirm="Do you want to edit profile?"
+                                confirm-label="Edit Profile"
+                            />
 
+                            <button name="%(action_vlan_wizard)d"
+                                string="Edit Vlan"
+                                type="action"
+                                title="Edit Vlan"
+                                onmouseover="this.classList.add('bg-info', 'text-white')"
+                                onmouseout="this.classList.remove('bg-info', 'text-white')"
+                                class="oe_highlight btn btn-secondary m-2 flex-fill"
+                                role="button"
+                                icon="fa-sitemap"
+                                confirm="Do you want to edit vlan?"
+                                confirm-label="Edit VLAN"
+                                context="{
+                                    'default_user_id': id,
+                                    'default_field_to_update': 'vlan_id',
+                                }"
+                            />
 <!--                            <button name="%(action_vlan_wizard)d"-->
 <!--                                string="Edit Vlan"-->
 <!--                                type="action"-->
@@ -263,70 +279,54 @@
 <!--                                icon="fa-sitemap"-->
 <!--                                confirm="Do you want to edit vlan?"-->
 <!--                                confirm-label="Edit VLAN"-->
-<!--                                context="{-->
-<!--                                    'default_user_id': active_id,-->
+<!--                        />-->
+<!--                             context="{-->
+<!--                                    'default_user_id': id,-->
 <!--                                    'default_field_to_update': 'vlan_id',-->
 <!--                                }"-->
-<!--                            />-->
-                            <button name="%(action_vlan_wizard)d"
-                                string="Edit Vlan"
-                                type="action"
-                                title="Edit Vlan"
-                                onmouseover="this.classList.add('bg-info', 'text-white')"
-                                onmouseout="this.classList.remove('bg-info', 'text-white')"
-                                class="oe_highlight btn btn-light m-2 flex-fill"
-                                role="button"
-                                icon="fa-sitemap"
-                                confirm="Do you want to edit vlan?"
-                                confirm-label="Edit VLAN"
-                                context="{
-                                    'default_user_id': id,
-                                    'default_field_to_update': 'vlan_id',
-                                }"
-                        />
 
 
-<!--                            <button name="%(action_users_package_wizard)d"-->
-<!--                                string="Edit Package"-->
-<!--                                type="action"-->
-<!--                                title="Edit Package"-->
-<!--                                invisible="conection_status == 'active'"-->
-<!--                                onmouseover="this.classList.add('bg-info', 'text-white')"-->
-<!--                                onmouseout="this.classList.remove('bg-info', 'text-white')"-->
-<!--                                class="oe_highlight btn btn-light m-2 flex-fill"-->
-<!--                                role="button"-->
-<!--                                icon="fa-cube"-->
-<!--                                context="{-->
-<!--                                    'default_user_id': active_id,-->
-<!--                                    'default_field_to_update': 'package_id',-->
-<!--                                }"-->
-<!--                                confirm="Do you want to edit package?"-->
-<!--                                confirm-label="Edit Package"-->
-<!--                            />-->
                             <button name="%(action_users_package_wizard)d"
                                 string="Edit Package"
                                 type="action"
                                 title="Edit Package"
                                 invisible="conection_status == 'active'"
-                                class="oe_highlight btn btn-light m-2 flex-fill"
+                                onmouseover="this.classList.add('bg-info', 'text-white')"
+                                onmouseout="this.classList.remove('bg-info', 'text-white')"
+                                class="oe_highlight btn btn-secondary m-2 flex-fill"
+                                role="button"
                                 icon="fa-cube"
                                 context="{
                                     'default_user_id': id,
                                     'default_field_to_update': 'package_id',
                                 }"
                                 confirm="Do you want to edit package?"
-                                confirm-label="Edit Package"/>
-
-<!--                            <button name="action_refresh_connection"-->
-<!--                                string=""-->
-<!--                                type="object"-->
-<!--                                title="Refresh"-->
-<!--                                onmouseover="this.classList.add('bg-danger', 'text-white')"-->
-<!--                                onmouseout="this.classList.remove('bg-danger', 'text-white')"-->
+                                confirm-label="Edit Package"
+                            />
+<!--                            <button name="%(action_users_package_wizard)d"-->
+<!--                                string="Edit Package"-->
+<!--                                type="action"-->
+<!--                                title="Edit Package"-->
+<!--                                invisible="conection_status == 'active'"-->
 <!--                                class="oe_highlight btn btn-light m-2 flex-fill"-->
-<!--                                role="button"-->
-<!--                                icon="fa-refresh"-->
-<!--                                confirm="Are you sure you want to refresh this user's connection? This will disconnect their current session." />-->
+<!--                                icon="fa-cube"-->
+<!--                                context="{-->
+<!--                                    'default_user_id': id,-->
+<!--                                    'default_field_to_update': 'package_id',-->
+<!--                                }"-->
+<!--                                confirm="Do you want to edit package?"-->
+<!--                                confirm-label="Edit Package"/>-->
+
+                            <button name="action_refresh_connection"
+                                string=""
+                                type="object"
+                                title="Refresh"
+                                onmouseover="this.classList.add('bg-danger', 'text-white')"
+                                onmouseout="this.classList.remove('bg-danger', 'text-white')"
+                                class="oe_highlight btn btn-secondary m-2 flex-fill"
+                                role="button"
+                                icon="fa-refresh"
+                                confirm="Are you sure you want to refresh this user's connection? This will disconnect their current session." />
                         </div>
 
 
@@ -346,13 +346,21 @@
                                         class="accordion-collapse collapse show"
                                         aria-labelledby="headingUserDetails">
                                         <div class="accordion-body">
-                                            <div
-                                                invisible="distributor_id == package_distributor"
+                                             <div
+                                                     invisible="package_id"
                                                 class="float-end text-danger">
                                                 <i class="fa fa-exclamation-triangle" /> Issues with
                                                 Record Health</div>
-                                            <div
-                                                invisible="distributor_id != package_distributor"
+<!--                                            <div-->
+<!--                                                invisible="distributor_id == package_distributor"-->
+<!--                                                class="float-end text-danger">-->
+<!--                                                <i class="fa fa-exclamation-triangle" /> Issues with-->
+<!--                                                Record Health</div>-->
+<!--                                            <div-->
+<!--                                                invisible="distributor_id != package_distributor"-->
+<!--                                                class="float-end text-muted">-->
+<!--                                                <i class="fa fa-check-circle" /> Record Health 100% </div>-->
+                                            <div invisible="not package_id"
                                                 class="float-end text-muted">
                                                 <i class="fa fa-check-circle" /> Record Health 100% </div>
 
@@ -373,17 +381,17 @@
                                                 <tbody>
 
 
-                                                    <tr>
-                                                        <td>
-                                                            Distributor</td>
-                                                        <td>
-                                                            <field name="distributor_id"
-                                                                readonly="1"
-                                                                options="{'no_open': True, 'no_create': True, 'no_create_edit': True}"
-                                                            />
-                                                        </td>
+<!--                                                    <tr>-->
+<!--                                                        <td>-->
+<!--                                                            Distributor</td>-->
+<!--                                                        <td>-->
+<!--&lt;!&ndash;                                                            <field name="distributor_id"&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                readonly="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                options="{'no_open': True, 'no_create': True, 'no_create_edit': True}"&ndash;&gt;-->
+<!--&lt;!&ndash;                                                            />&ndash;&gt;-->
+<!--                                                        </td>-->
 
-                                                    </tr>
+<!--                                                    </tr>-->
 
                                                     <tr>
                                                         <td>
@@ -493,14 +501,15 @@
                                                         </td>
                                                     </tr>
 
-                                                    <tr invisible="not nas_id">
+<!--                                                    <tr invisible="not nas_id">-->
+                                                    <tr>
                                                         <td>NAS IP</td>
                                                         <td>
 
-                                                            <field name="nas_id"
-                                                                options="{'no_open': True, 'no_create': True, 'no_create_edit': True}"
-                                                                readonly="1"
-                                                            />
+<!--                                                            <field name="nas_id"-->
+<!--                                                                options="{'no_open': True, 'no_create': True, 'no_create_edit': True}"-->
+<!--                                                                readonly="1"-->
+<!--                                                            />-->
 
                                                         </td>
                                                     </tr>
@@ -535,7 +544,7 @@
                                     </div>
                                 </div>
 
-                                <!-- Ledger Details
+<!--                               Ledger Details-->
                                 <div class="accordion-item m-2 border rounded-3">
                                     <h2 class="accordion-header" id="headingLedgerDetails">
                                         <a class="accordion-button collapsed" type="button"
@@ -552,7 +561,7 @@
                                             <p>Tested</p>
                                         </div>
                                     </div>
-                                </div> -->
+                                </div>
 
                                 <!-- IP History -->
                                 <div class="accordion-item m-2 border rounded-3">
@@ -621,21 +630,23 @@
                     </section>
 
                     <group invisible="radusergroup_id">
+
                         <group>
-                            <field name="distributor_id"
-                                readonly="distributor_id" force_save="1"
-                                options="{'no_open': True,'no_create' : True, 'no_create_edit' : True}"
-                                groups="base_security_groups.group_admin,base_security_groups.group_distributor" />
-                            <field name="distributor_type" />
+<!--                            <field name="distributor_id"-->
+<!--                                readonly="distributor_id" force_save="1"-->
+
+<!--                                 />-->
+<!--                            <field name="distributor_type" />-->
                             <field name="package_id"
+                                 />
+                            <field name="vlan_id"
                                 options="{'no_open': True,'no_create' : True, 'no_create_edit' : True}" />
-<!--                            <field name="vlan_id"-->
+<!--                            <field name="nas_id"-->
 <!--                                options="{'no_open': True,'no_create' : True, 'no_create_edit' : True}" />-->
-                            <field name="nas_id"
-                                options="{'no_open': True,'no_create' : True, 'no_create_edit' : True}" />
                             <field name="id_subscription"/>
                             <field name="id_address"/>
                             <field name="opportunity_id"/>
+                            <field name="company_id" readonly="1"/>
                         </group>
 
                         <group>

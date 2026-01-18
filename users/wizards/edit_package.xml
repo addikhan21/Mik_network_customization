@@ -7,22 +7,22 @@
       <field name="arch" type="xml">
         <form string="User Package">
 
-          <div class="d-flex pb-2 align-items-center">
+          <div class="d-flex align-items-center">
             <div>
               <i class="fa fa-cube pb-1 fa-3x text-primary" title="Users" />
             </div>
-            <div class="card-body">
-              <h2 class="card-title">Edit Package Details</h2>
-              <p class="card-subtitle mb-2 text-muted">Your go-to solution for user
+            <div class="card-body" style="margin-top:10px !important;">
+              <h2 class="card-title ms-2">Edit Package Details</h2>
+              <p class="card-subtitle mb-2 text-muted ms-2">Your go-to solution for user
                 package updates.
               </p>
             </div>
           </div>
 
           <group>
-          <div class="d-flex ">
-          <i class="fa fa-user mt-1 me-2" role="img" aria-label="User" />
-            <field name="user_id"  string="User" readonly="1" />
+            <div class="d-flex ">
+              <i class="fa fa-user mt-1 me-2" role="img" aria-label="User"/>
+              <field name="user_id" string="User" readonly="1"/>
             </div>
           </group>
 
@@ -46,7 +46,7 @@
 
             <group string="New Value" colspan="2">
               <div colspan="2">
-                <field name="distributor_id" invisible="1" />
+<!--                <field name="distributor_id" invisible="1" />-->
                 <field name="field_value"
                   options="{'no_open': True, 'no_create': True, 'no_edit': True}" />
               </div>

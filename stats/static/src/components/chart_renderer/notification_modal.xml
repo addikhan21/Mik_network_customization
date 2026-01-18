@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="stats.NotificationModal" owl="1">
+        <div class="notification-modal animate-drop">
+            <div class="modal-content shadow-lg">
+                <div class="modal-header bg-info text-white">
+                    <div class="d-flex align-items-center">
+                        <i class="fa fa-bullhorn fa-2x me-2"></i>
+                        <h3 class="modal-title text-white mb-0">
+                            <t t-esc="props.title"/>
+                        </h3>
+                    </div>
+                </div>
+                <div class="modal-body" t-out="props.body"/>
+                <div class="modal-footer">
+                    <button class="btn btn-info" t-on-click="close">Close</button>
+                </div>
+            </div>
+        </div>
+        <style>
+        .notification-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            max-width: 90%;
+            width: 800px;
+        }
+        .animate-drop {
+    animation: smoothSlide 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes smoothSlide {
+    0% {
+        transform: translate(-50%, -200%);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(-50%, -50%);
+        opacity: 1;
+    }
+}
+      
+        .modal-content {
+            background: white;
+            border-radius: 8px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        .modal-header {
+            padding: 1rem;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .modal-body {
+            padding: 1rem;
+        }
+        .modal-footer {
+            padding: 1rem;
+            border-top: 1px solid #dee2e6;
+        }
+        </style>
+    </t>
+</templates>

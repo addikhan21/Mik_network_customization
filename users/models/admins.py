@@ -5,8 +5,8 @@ from datetime import timedelta, date
 class Distributors(models.Model):
     _inherit = "admins"
 
-    user_count = fields.Integer(related="distributor_id.user_count", string="Users")
-    total_users = fields.Integer(related="distributor_id.total_users", string="Total Users")
+    # user_count = fields.Integer(related="distributor_id.user_count", string="Users")
+    # total_users = fields.Integer(related="distributor_id.total_users", string="Total Users")
     expires_soon_count = fields.Integer(compute="_compute_expires_soon_count")
     expired_count = fields.Integer(compute="_compute_expired_count")
     new_users_count = fields.Integer(compute="_compute_new_users_count")
@@ -84,7 +84,7 @@ class Distributors(models.Model):
             
             admin.expired_count = self.env["users"].search_count(
                 [
-                    ("distributor_id", "=", admin.distributor_id.id),
+                    # ("distributor_id", "=", admin.distributor_id.id),
                     ("expiry_date", "<", fields.Datetime.now()),
                 ]
             )

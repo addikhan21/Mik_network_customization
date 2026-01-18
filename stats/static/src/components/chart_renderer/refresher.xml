@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2022 Tecnativa - Alexandre Díaz
+     Copyright 2023 Taras Shabaranskyi
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<template>
+    <t t-name="web_refresher.Button">
+        <nav class="oe_refresher" aria-label="Refresher" aria-atomic="true">
+            <!-- <button
+                class="fa fa-refresh btn btn-icon btn-light oe_pager_refresh me-2"
+                aria-label="Refresh"
+                t-on-click="onClickRefresh"
+                title="Refresh"
+                tabindex="-1"
+            /> -->
+           <div class="cursor-pointer"
+                aria-label="Refresh"
+                title="Refresh"
+                role="button"
+                t-on-click="onClickRefresh">
+                <div class="d-flex align-items-center justify-content-center rounded-circle bg-light hover-primary"
+                    style="width: 36px; height: 36px; transition: all 0.3s ease;">
+                    <i class="fa fa-refresh text-primary" style="font-size: 16px;"></i>
+                </div>
+            </div>
+        </nav>
+    </t>
+</template>
