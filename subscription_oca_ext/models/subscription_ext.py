@@ -9,7 +9,7 @@ class SaleSubscription(models.Model):
     opportunity_id = fields.Many2one('crm.lead', string='Opportunity', readonly=True)
     value_set = fields.Char(string='Value Set')
     stage_type = fields.Selection(related='stage_id.type', store=True)
-
+    nas_id = fields.Many2one('network.nas')
     @api.onchange('stage_id')
     def onchange_ip_address_id(self):
         for record in self:

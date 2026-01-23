@@ -75,7 +75,8 @@ class Users(models.Model):
     #     related="package_id.package_id", store=True, string="NAS ID"
     # )
     nas_id = fields.Many2one(
-         store=True, string="NAS ID"
+        'network.nas',
+        string="NAS ID"
     )
     # vlan_id = fields.Many2one(
     #     "vlans",
@@ -465,7 +466,9 @@ class Users(models.Model):
         Creates a complete user profile with all related records:
         - RADIUS authentication entries
         """
-
+        check_username = self.search([('username','=',vals_list[0]['username'])])
+        if check_username:
+            raise ValidationError(_("Username already exists with this partner!"))
         res = super().create(vals_list)
         for record in res:
             record.create_radcheck_entry()
