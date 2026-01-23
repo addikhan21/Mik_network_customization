@@ -10,6 +10,11 @@ class SaleSubscription(models.Model):
     value_set = fields.Char(string='Value Set')
     stage_type = fields.Selection(related='stage_id.type', store=True)
     nas_id = fields.Many2one('network.nas')
+    data_package_id = fields.Many2one(
+        'product.product',
+        string='Data Package',
+        domain=[('is_isp_service', '=', True)],
+    )
     @api.onchange('stage_id')
     def onchange_ip_address_id(self):
         for record in self:
@@ -35,12 +40,13 @@ class SaleSubscription(models.Model):
                     'address': record.delivery_address(),
                     'package_id':record.opportunity_id.data_package_id.id if record.opportunity_id.data_package_id else False,
                     'id_subscription': recrd_id,
+                    'nas_id': record.nas_id.id,
                     'opportunity_id': record.opportunity_id.id if record.opportunity_id else False,
                 })
             if record.ip_address_id:
                 record.value_set = record.ip_address_id.ip_address
                 record.ip_address_id.write({'subscription_id': record.id})
-                users.write({'id_address': record.ip_address_id.ip_address})
+                users.write({'ip_address': record.ip_address_id.ip_address})
 
 
     def delivery_address(self):

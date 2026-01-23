@@ -644,7 +644,7 @@
 <!--                            <field name="nas_id"-->
 <!--                                options="{'no_open': True,'no_create' : True, 'no_create_edit' : True}" />-->
                             <field name="id_subscription"/>
-                            <field name="id_address"/>
+                            <field name="ip_address"/>
                             <field name="nas_id"/>
                             <field name="opportunity_id"/>
                             <field name="company_id" readonly="1"/>

@@ -1,4 +1,4 @@
-from odoo import models, fields, api, _
+from odoo import models, fields, api, _, Command
 from odoo.exceptions import ValidationError
 
 
@@ -7,21 +7,36 @@ class CrmLead(models.Model):
 
     phone = fields.Char(string='Phone Number', required=True)
     contact_name = fields.Char(string='Full Name', required=True)
-    otc = fields.Char(string='OTC',)
-    service_charges= fields.Char(string='Service Charges')
+    otc = fields.Char(string='OTC', )
+    service_charges = fields.Char(string='Service Charges')
     hardware_required = fields.Boolean(string='Is Hardware Required')
     data_package_id = fields.Many2one(
         'product.product',
         string='Data Package',
         domain=[('is_isp_service', '=', True)],
     )
+
     nas_ids = fields.Many2many(
         'network.nas',
         string='NAS',
-        related='data_package_id.service_group_id.nas_ids',
-        domain=[('id','=',-1)],
-        relation='network_nas_crm_lead_rel'
+        relation='network_nas_crm_lead_rel',
+        compute = 'sub_compute_nas_ids'
     )
+    nas_id = fields.Many2one(
+        'network.nas',
+        string='NAS',
+        required=True
+    )
+
+    @api.depends('data_package_id')
+    def sub_compute_nas_ids(self):
+        for record in self:
+            if record.data_package_id and record.data_package_id.service_group_id:
+                record.nas_ids = [Command.link(nas_id) for nas_id in
+                                  record.data_package_id.service_group_id.nas_ids.ids]
+            else:
+                record.nas_ids = [Command.clear()]
+
     service_group_id = fields.Many2one(
         related='data_package_id.service_group_id',
         store=True,
@@ -33,22 +48,8 @@ class CrmLead(models.Model):
         string='Is Network Equipment',
         required=True,
     )
-    # @api.depends('data_package_id')
-    # def update_data_package_id(self):
-    #     if self.data_package_id and self.data_package_id.service_group_id:
-    #         return {
-    #             'domain': {
-    #                 'nas_ids': [
-    #                     ('id', 'in', self.data_package_id.service_group_id.nas_ids.ids)
-    #                 ]
-    #             }
-    #         }
-    #     else:
-    #         return {
-    #             'domain': {
-    #                 'nas_ids': []
-    #             }
-    #         }
+
+
     @api.model
     def _generate_customer_uid(self):
         seq = self.env.ref('crm_ext.seq_customer_uid', raise_if_not_found=False)
@@ -94,7 +95,6 @@ class CrmLead(models.Model):
         elif self.hardware_required and self.is_hard_equipment_ids:
             self._create_delivery_order(self.is_hard_equipment_ids)
 
-
         if self.otc or self.service_charges:
             self._create_sale_order_with_charges()
 
@@ -122,14 +122,12 @@ class CrmLead(models.Model):
             'opportunity_id': self.id,
         })
 
-
         sale_order.write({'order_line': order_lines})
 
         sale_order.action_confirm()
 
         if sale_order.state == 'sale':
             sale_order._create_invoices()
-
 
         self.message_post(
             body=_('Sale order %s created with charges') % sale_order.name)
@@ -138,7 +136,7 @@ class CrmLead(models.Model):
         """Create delivery order for hardware equipment"""
         if not equipment_lines:
             return
-        
+
         # Check if delivery order already exists for this lead
         existing_delivery = self.env['stock.picking'].search([
             ('opportunity_id', '=', self.id),
@@ -191,9 +189,10 @@ class CrmLead(models.Model):
                 'opportunity_id': self.id,
                 'sale_order_id': sale_order.id,
                 'crm_team_id': self.team_id.id,
-                'nas_id': self.nas_ids[0].id,
+                'nas_id': self.nas_id.id,
+                'data_package_id': self.data_package_id.id,
             })
-            
+
             subscription_lines = []
             for line in sale_order.order_line:
                 subscription_lines.append((0, 0, {
@@ -204,10 +203,9 @@ class CrmLead(models.Model):
                     'discount': line.discount,
                     'price_subtotal': line.price_subtotal,
                 }))
-            
+
             subscription.write({'sale_subscription_line_ids': subscription_lines})
             self.message_post(body=_('subscription %s created for data package') % subscription.name)
-
 
 
 class EquipmentLineExt(models.Model):
