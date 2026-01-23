@@ -33,7 +33,7 @@ class Users(models.Model):
     mobile = fields.Char(string="Mobile", required=False)
     address = fields.Char(string="Address", required=False)
     id_subscription = fields.Char(string="Subscription id" ,readonly=True)
-    id_address = fields.Char(string="ID Address",readonly=True)
+    ip_address = fields.Char(string="IP Address",readonly=True)
     opportunity_id = fields.Many2one('crm.lead', string='Opportunity', readonly=True)
     company_id = fields.Many2one('res.company', string='Company', required=True, default=lambda self: self.env.company)
 
@@ -76,7 +76,8 @@ class Users(models.Model):
     # )
     nas_id = fields.Many2one(
         'network.nas',
-        string="NAS ID"
+        string="NAS ID",
+        required=True
     )
     # vlan_id = fields.Many2one(
     #     "vlans",
@@ -205,7 +206,7 @@ class Users(models.Model):
     def _compute_access(self):
         for record in self:
             is_admin = self.env.user.has_group("base_security_groups.group_admin")
-            record.can_access = not (is_admin or is_distributor)
+            record.can_access = not (is_admin)
 
     @api.depends()
     def _compute_mac_address(self):
@@ -509,12 +510,12 @@ class Users(models.Model):
                     "op": ":=",
                     "value": self.password,
                 },
-                # {
-                #     "username": self.username,
-                #     "attribute": "NAS-IP-Address",  # nas-binding
-                #     "op": "==",
-                #     "value": self.nas_id.nasname,
-                # },
+                {
+                    "username": self.username,
+                    "attribute": "NAS-IP-Address",  # nas-binding
+                    "op": "==",
+                    "value": self.nas_id.nasname,
+                },
                 {
                     "username": self.username,
                     "attribute": "Simultaneous-Use",  # simultaneous-use
@@ -529,6 +530,16 @@ class Users(models.Model):
                 },
 
             ]
+            # Making Vlan Biniding Optional.
+            if self.ip_address:
+                radcheck_vals.append(
+                    {
+                        "username": self.username,
+                        "attribute": "Framed-IP-Address",
+                        "op": ":=",
+                        "value": self.ip_address,
+                    }
+                )
 
 
             # Making Vlan Biniding Optional.
