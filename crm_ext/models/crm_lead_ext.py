@@ -13,16 +13,42 @@ class CrmLead(models.Model):
     data_package_id = fields.Many2one(
         'product.product',
         string='Data Package',
-        domain=[('is_isp_service', '=', True)]
+        domain=[('is_isp_service', '=', True)],
     )
-
+    nas_ids = fields.Many2many(
+        'network.nas',
+        string='NAS',
+        related='data_package_id.service_group_id.nas_ids',
+        domain=[('id','=',-1)],
+        relation='network_nas_crm_lead_rel'
+    )
+    service_group_id = fields.Many2one(
+        related='data_package_id.service_group_id',
+        store=True,
+        readonly=True
+    )
     is_hard_equipment_ids = fields.One2many(
         'equipment.line',
         'equipment_line_id',
         string='Is Network Equipment',
         required=True,
     )
-
+    # @api.depends('data_package_id')
+    # def update_data_package_id(self):
+    #     if self.data_package_id and self.data_package_id.service_group_id:
+    #         return {
+    #             'domain': {
+    #                 'nas_ids': [
+    #                     ('id', 'in', self.data_package_id.service_group_id.nas_ids.ids)
+    #                 ]
+    #             }
+    #         }
+    #     else:
+    #         return {
+    #             'domain': {
+    #                 'nas_ids': []
+    #             }
+    #         }
     @api.model
     def _generate_customer_uid(self):
         seq = self.env.ref('crm_ext.seq_customer_uid', raise_if_not_found=False)
@@ -38,7 +64,6 @@ class CrmLead(models.Model):
     def action_set_won_rainbowman(self):
         """Override to add validation and automation when marking lead as won"""
         self.ensure_one()
-        # if self.stage_id.is_won
         # Validation checks before marking as won
         partner = self.partner_id
         if not partner:
@@ -166,6 +191,7 @@ class CrmLead(models.Model):
                 'opportunity_id': self.id,
                 'sale_order_id': sale_order.id,
                 'crm_team_id': self.team_id.id,
+                'nas_id': self.nas_ids[0].id,
             })
             
             subscription_lines = []
