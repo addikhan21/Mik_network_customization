@@ -531,6 +531,7 @@ class Users(models.Model):
 
             ]
             # Making Vlan Biniding Optional.
+
             if self.ip_address:
                 radcheck_vals.append(
                     {
