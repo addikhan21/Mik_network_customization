@@ -19,7 +19,6 @@ class SaleSubscription(models.Model):
     def onchange_ip_address_id(self):
         for record in self:
             if record.stage_id.type != 'pre':
-
                 record.create_users()
 
     def create_users(self):
@@ -41,12 +40,12 @@ class SaleSubscription(models.Model):
                     'package_id':record.opportunity_id.data_package_id.id if record.opportunity_id.data_package_id else False,
                     'id_subscription': recrd_id,
                     'nas_id': record.nas_id.id,
+                    'ip_address': record.ip_address_id.ip_address,
                     'opportunity_id': record.opportunity_id.id if record.opportunity_id else False,
                 })
             if record.ip_address_id:
                 record.value_set = record.ip_address_id.ip_address
                 record.ip_address_id.write({'subscription_id': record.id})
-                users.write({'ip_address': record.ip_address_id.ip_address})
 
 
     def delivery_address(self):
