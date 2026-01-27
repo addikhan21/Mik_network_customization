@@ -195,7 +195,88 @@ class Users(models.Model):
 
     can_access = fields.Boolean(compute="_compute_access")  # Original compute field
     # can_access = fields.Boolean()
+    def action_recharge(self):
+        with self.env.cr.savepoint():
+            # to make aoperations atomic will come back to it later
+            extend_exipry = self._compute_expiry_date()
 
+        if extend_exipry:
+            self.message_post(
+                body=Markup(
+                    f"""
+                <div class="text-muted" role="alert">
+                    <i class="fa fa-check-circle text-success"></i> User <b>{self.name}</b> Recharged<br>
+                    <b><i class="fa fa-calendar"></i> New Expiry:</b> {self.expiry_date}<br>
+                    <b><i class="fa fa-refresh"></i> Recharge Status:</b> Completed<br>
+                    <b><i class="fa fa-history"></i> Total Recharges:</b> {self.recharge_count}<br>
+                    <b> Updated by:</b> {self.env.user.name}<br>
+                    <b> Date:</b> {fields.Datetime.now()}<br>
+                </div>
+                """
+                )
+            )
+            return {
+                "type": "ir.actions.client",
+                "tag": "display_notification",
+                "params": {
+                    "title": "Success",
+                    "message": f"User {self.name} has been recharged successfully!",
+                    "type": "success",
+                    "sticky": False,
+                    "next": {"type": "ir.actions.act_window_close"},
+                },
+            }
+        else:
+            return {
+                "type": "ir.actions.client",
+                "tag": "display_notification",
+                "params": {
+                    "title": "Failed",
+                    "message": f"Some error occurred while recharging user {self.name}!",
+                    "type": "Danger",
+                    "sticky": False,
+                    "next": {"type": "ir.actions.act_window_close"},
+                },
+            }
+
+    def _compute_expiry_date(self):
+        current_date = date.today()
+        expiry_date = current_date + timedelta(days=self.package_id.service_group_id.duration)
+        expiry_date = fields.Datetime.to_datetime(expiry_date)
+        if expiry_date:
+            expiry_date += relativedelta(hours=11)
+            formatted_expiry = expiry_date.strftime("%d %b %Y %H:%M")
+
+            existing_expiry = (
+                self.env["radcheck"]
+                .sudo()
+                .search(
+                    [
+                        ("username", "=", self.username),
+                        ("attribute", "=", "Expiration"),
+                    ],
+                    limit=1,
+                )
+            )
+
+            if existing_expiry:
+                existing_expiry.sudo().write({"value": formatted_expiry})
+            else:
+                self.env["radcheck"].sudo().create(
+                    {
+                        "username": self.username,
+                        "attribute": "Expiration",
+                        "op": ":=",
+                        "value": formatted_expiry,
+                    }
+                )
+
+            self.expiry_date_char = formatted_expiry
+        for record in self:
+            if record.package_id and expiry_date:
+                record.expiry_date = expiry_date.strftime("%Y-%m-%d %H:%M")
+
+        return True
     @api.depends("expiry_date")
     def _compute_expiry_date_char(self):
         for record in self:

@@ -9,3 +9,4 @@ from . import sale_subscription_line
 from . import sale_subscription_stage
 from . import sale_subscription_tag
 from . import sale_subscription_template
+from . import product_pricelist_ext

@@ -1,4 +1,4 @@
-from odoo import models, fields,api
+from odoo import models, fields,api,_
 from odoo.exceptions import AccessError, UserError, ValidationError
 
 
@@ -15,6 +15,13 @@ class SaleSubscription(models.Model):
         string='Data Package',
         domain=[('is_isp_service', '=', True)],
     )
+    users_id = fields.Many2one('users', string='User')
+
+    def recharge_user(self):
+        if self.users_id:
+            self.users_id.action_recharge()
+        print('test')
+
     @api.onchange('stage_id')
     def onchange_ip_address_id(self):
         for record in self:
@@ -43,6 +50,13 @@ class SaleSubscription(models.Model):
                     'ip_address': record.ip_address_id.ip_address,
                     'opportunity_id': record.opportunity_id.id if record.opportunity_id else False,
                 })
+                get_subs = self.env['sale.subscription'].search([('id', '=', int(users.id_subscription))])
+                message = f"username = {users.username} and password {users.password}"
+                get_subs.message_post(body=message)
+            # if record._origin.id:
+            #     self.message_post(body=_('User %s created for subscription %s') % (users.name, users.password))
+            if users:
+                record.users_id = users.id
             if record.ip_address_id:
                 record.value_set = record.ip_address_id.ip_address
                 record.ip_address_id.write({'subscription_id': record.id})

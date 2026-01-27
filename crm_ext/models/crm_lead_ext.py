@@ -57,7 +57,7 @@ class CrmLead(models.Model):
             seq = self.env['ir.sequence'].sudo().create({
                 'name': 'Customer UID Sequence',
                 'implementation': 'standard',
-                'prefix': 'CUS-',
+                'prefix': 'CUS',
                 'padding': 6,
             })
         return seq.next_by_id()

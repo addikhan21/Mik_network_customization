@@ -3,7 +3,7 @@
     <record id="seq_customer_uid" model="ir.sequence">
         <field name="name">Customer UID Sequence</field>
         <field name="code">crm.customer.uid</field>
-        <field name="prefix">CUS-</field>
+        <field name="prefix">CUS</field>
         <field name="padding">6</field>
         <field name="implementation">standard</field>
     </record>
