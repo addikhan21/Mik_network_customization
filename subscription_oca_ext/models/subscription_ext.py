@@ -74,3 +74,18 @@ class SaleSubscription(models.Model):
             ]
             address = ', '.join(filter(None, parts))
             return address
+
+    def action_view_users(self):
+        """
+        Action to open the tree view of the related radcheck records.
+        The domain filter will show only the radcheck records that are associated
+        with the current user.
+        """
+        return {
+            "name": "users",
+            "view_mode": "list,form",
+            "res_model": "users",
+            "type": "ir.actions.act_window",
+            "domain": [("id", "=", self.users_id.id)],
+
+        }

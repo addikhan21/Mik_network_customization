@@ -5,8 +5,22 @@
         <field name="model">sale.subscription</field>
         <field name="inherit_id" ref="subscription_oca.sale_subscription_form"/>
         <field name="arch" type="xml">
+            <xpath expr="//sheet/div[@name='button_box']/button[@name='action_view_sale_order_ids']" position="after">
+                <div class="oe_button_box" name="button_box">
+
+                    <button name="action_view_users"
+                            type="object"
+                            string="User"
+                            class="oe_stat_button"
+                            invisible="not users_id"
+                            icon="fa-user">
+                        <field name="users_id" readonly="1"/>
+                    </button>
+                </div>
+            </xpath>
             <xpath expr="//button[@name='action_close_subscription']" position="after">
-                <button name="recharge_user"  invisible="not users_id" type="object" string="Recharge User" class="btn btn-secondary"/>
+                <button name="recharge_user" invisible="not users_id" type="object" string="Recharge User"
+                        class="btn btn-secondary"/>
             </xpath>
             <xpath expr="//field[@name='company_id']" position="after">
                 <field name="ip_address_id"/>
