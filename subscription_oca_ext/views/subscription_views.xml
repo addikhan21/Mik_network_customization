@@ -19,8 +19,8 @@
                 </div>
             </xpath>
             <xpath expr="//button[@name='action_close_subscription']" position="after">
-                <button name="recharge_user" confirm="Are you sure you want to view users?" invisible="not users_id" type="object" string="Recharge User"
-                        class="btn btn-secondary"/>
+                <button name="recharge_user" confirm="Are you sure you want to recharge users?" invisible="not users_id" type="object" string="Recharge User"
+                        icon="fa-money" class="btn btn-info"/>
             </xpath>
             <xpath expr="//field[@name='company_id']" position="after">
                 <field name="ip_address_id"/>
