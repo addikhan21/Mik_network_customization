@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form View Extension -->
+    <record id="view_rad_users_form_inherit_genieacs" model="ir.ui.view">
+        <field name="name">users.form.inherit.genieacs</field>
+        <field name="model">users</field>
+        <field name="inherit_id" ref="users.rad_users_form_view"/>
+        <field name="arch" type="xml">
+            <!-- Add GenieACS Device ID in the Service Details table -->
+            <xpath expr="//field[@name='mac_address']/../.." position="after">
+                <tr invisible="not genieacs_device_id">
+                    <td>GenieACS Device ID</td>
+                    <td class="d-flex">
+                        <field name="genieacs_device_id" class="mt-1" readonly="1" />
+                    </td>
+                </tr>
+            </xpath>
+
+            <!-- Add GenieACS action buttons in the control panel -->
+            <xpath expr="//button[@name='action_refresh_connection']" position="after">
+                <button name="action_fetch_cpe_device"
+                    string="Fetch CPE"
+                    type="object"
+                    title="Search and link CPE device from GenieACS"
+                    class="oe_highlight btn btn-info m-2 flex-fill"
+                    role="button"
+                    icon="fa-download" />
+
+                <button name="action_push_password_to_cpe"
+                    string="Push Credentials"
+                    type="object"
+                    title="Push PPPoE username and password to CPE router via TR-069"
+                    class="oe_highlight btn btn-primary m-2 flex-fill"
+                    role="button"
+                    invisible="not genieacs_device_id"
+                    confirm="This will push the current PPPoE username and password to the CPE router. Continue?"
+                    icon="fa-upload" />
+
+                <button name="action_refresh_cpe_params"
+                    string="Refresh CPE"
+                    type="object"
+                    title="Refresh all device parameters from CPE via TR-069"
+                    class="oe_highlight btn btn-secondary m-2 flex-fill"
+                    role="button"
+                    invisible="not genieacs_device_id"
+                    icon="fa-sync" />
+
+                <button name="action_reboot_cpe"
+                    string="Reboot CPE"
+                    type="object"
+                    title="Reboot CPE device via GenieACS TR-069"
+                    class="oe_highlight btn btn-warning m-2 flex-fill"
+                    role="button"
+                    invisible="not genieacs_device_id"
+                    confirm="Are you sure you want to reboot the CPE device? The customer will lose internet temporarily."
+                    icon="fa-power-off" />
+
+                <button name="action_factory_reset_cpe"
+                    string="Reset CPE"
+                    type="object"
+                    title="Factory Reset CPE device via GenieACS TR-069"
+                    class="oe_highlight btn btn-danger m-2 flex-fill"
+                    role="button"
+                    invisible="not genieacs_device_id"
+                    confirm="DANGER! Factory reset will erase ALL configuration on the CPE device. The customer will need to be re-provisioned. Are you absolutely sure?"
+                    icon="fa-eraser" />
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Tree View Extension -->
+    <record id="view_rad_users_tree_inherit_genieacs" model="ir.ui.view">
+        <field name="name">users.tree.inherit.genieacs</field>
+        <field name="model">users</field>
+        <field name="inherit_id" ref="users.rad_users_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='expiry_date_char']" position="after">
+                <field name="genieacs_device_id" optional="hide" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
