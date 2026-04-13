@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_res_config_settings_form_inherit_genieacs" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.genieacs</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="network.view_res_config_settings_form_inherit"/>
+        <field name="arch" type="xml">
+            <xpath expr="//block[@name='users_setting_container']" position="after">
+                <block title="GenieACS TR-069 Service" name="genieacs_setting_container">
+                    <setting id="genieacs_details_settings" icon="fa-check">
+                        <group>
+                            <div colspan="2">
+                                <h6 class="m-0">GenieACS API Configuration</h6>
+                                <p>Configure TR-069 GenieACS NBI connectivity (default port: 7557):</p>
+                            </div>
+                            <field name="genieacs_url" placeholder="http://192.168.1.50:7557" />
+                            <field name="genieacs_username" placeholder="Optional" />
+                            <field name="genieacs_password" password="True" placeholder="Optional" />
+                        </group>
+                    </setting>
+                    <setting id="genieacs_test_connection_settings" icon="fa-check">
+                        <button name="action_test_genieacs_connection"
+                                string="Test GenieACS Connection"
+                                type="object"
+                                icon="fa-plug"
+                                title="Test connectivity to GenieACS NBI server"
+                                class="btn btn-info" />
+                    </setting>
+                </block>
+            </xpath>
+        </field>
+    </record>
+</odoo>

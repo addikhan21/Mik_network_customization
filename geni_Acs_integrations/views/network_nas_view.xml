@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_network_nas_form_inherit_genieacs" model="ir.ui.view">
+        <field name="name">network.nas.form.inherit.genieacs</field>
+        <field name="model">network.nas</field>
+        <field name="inherit_id" ref="network.network_nas_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='franchises']" position="after">
+                <page name="olts" string="OLTs">
+                    <field name="olt_ids">
+                        <list editable="bottom">
+                            <field name="name"/>
+                            <field name="ip_address"/>
+                            <field name="brand"/>
+                            <field name="location"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
