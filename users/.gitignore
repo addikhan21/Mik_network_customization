@@ -1,0 +1,44 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+*.venv/
+odoo18-venv/
+env/
+ENV/
+
+# Odoo specific
+*.log
+*.pot
+*.mo
+*.db
+*.sqlite3
+*.dump
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
+*.bak
+*.tmp
+
+# IDE/editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Node/npm
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Dist / build
+dist/
+build/
+*.egg-info/
+*.egg

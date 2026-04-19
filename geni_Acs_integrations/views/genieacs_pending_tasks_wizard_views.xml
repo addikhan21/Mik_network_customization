@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Wizard Form View -->
+    <record id="view_genieacs_pending_tasks_wizard_form" model="ir.ui.view">
+        <field name="name">genieacs.pending.tasks.wizard.form</field>
+        <field name="model">genieacs.pending.tasks.wizard</field>
+        <field name="arch" type="xml">
+            <form string="GenieACS Pending Tasks">
+                <sheet>
+                    <group>
+                        <field name="tasks_html" nolabel="1" style="opacity: 1 !important;"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_refresh" string="Refresh" type="object" class="btn-primary" icon="fa-refresh"/>
+                    <button string="Close" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action to open wizard -->
+    <record id="action_genieacs_pending_tasks_wizard" model="ir.actions.act_window">
+        <field name="name">Pending Tasks</field>
+        <field name="res_model">genieacs.pending.tasks.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Menu item -->
+    <menuitem id="menu_genieacs_pending_tasks"
+              name="Pending Tasks"
+              parent="network.network_menu_root"
+              action="action_genieacs_pending_tasks_wizard"
+              sequence="20"/>
+</odoo>

@@ -67,7 +67,7 @@ class UpdateUserProfile(models.TransientModel):
                 
                 
     def write_records(self):
-        self.check_access()
+        # self.check_access()
         if self.user_id:
             self.user_id.update({
                 'name': self.new_name,

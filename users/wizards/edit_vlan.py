@@ -50,7 +50,7 @@ class EditVlan(models.TransientModel):
                 
 
     def action_update_vlan(self):
-        self.check_access()
+        # self.check_access()
         if self.user_id and self.field_value:
 
             self.user_id.vlan_id = self.field_value.id

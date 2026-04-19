@@ -14,6 +14,7 @@
         "views/network_olt_views.xml",
         "views/network_nas_view.xml",
         "views/res_config_settings_views.xml",
+        "views/genieacs_pending_tasks_wizard_views.xml",
         "views/users_views.xml",
     ],
     "application": False,
