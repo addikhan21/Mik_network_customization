@@ -16,13 +16,36 @@
                 </tr>
             </xpath>
 
+            <!-- Inject CPE details content into the CPE Details accordion -->
+            <xpath expr="//div[@name='cpe_details_body']" position="replace">
+                <div class="accordion-body" name="cpe_details_body">
+                    <div
+                        class="alert alert-light d-flex justify-content-between align-items-center"
+                        role="alert">
+                        <div>
+                            <span>CPE Device Details from GenieACS. Click refresh to update!</span>
+                        </div>
+                        <button class="btn btn-link text-muted"
+                            name="action_refresh_cpe_details" type="object">
+                            <i class="fa fa fa-refresh  me-2"></i> Refresh CPE Details
+                        </button>
+                    </div>
+
+                    <field name="cpe_details_html"
+                        style="opacity: 1 !important;"
+                        readonly="1" />
+                </div>
+            </xpath>
+
             <!-- Add GenieACS action buttons in the control panel -->
             <xpath expr="//button[@name='action_refresh_connection']" position="after">
                 <button name="action_fetch_cpe_device"
                     string="Fetch CPE"
                     type="object"
                     title="Search and link CPE device from GenieACS"
-                    class="oe_highlight btn btn-info m-2 flex-fill"
+                    onmouseover="this.classList.add('bg-info', 'text-white')"
+                    onmouseout="this.classList.remove('bg-info', 'text-white')"
+                    class="oe_highlight btn btn-secondary m-2 flex-fill"
                     role="button"
                     icon="fa-download" />
 
@@ -30,7 +53,9 @@
                     string="Push Credentials"
                     type="object"
                     title="Push PPPoE username and password to CPE router via TR-069"
-                    class="oe_highlight btn btn-primary m-2 flex-fill"
+                    onmouseover="this.classList.add('bg-primary', 'text-white')"
+                    onmouseout="this.classList.remove('bg-primary', 'text-white')"
+                    class="oe_highlight btn btn-secondary m-2 flex-fill"
                     role="button"
                     invisible="not genieacs_device_id"
                     confirm="This will push the current PPPoE username and password to the CPE router. Continue?"
@@ -40,6 +65,8 @@
                     string="Refresh CPE"
                     type="object"
                     title="Refresh all device parameters from CPE via TR-069"
+                    onmouseover="this.classList.add('bg-info', 'text-white')"
+                    onmouseout="this.classList.remove('bg-info', 'text-white')"
                     class="oe_highlight btn btn-secondary m-2 flex-fill"
                     role="button"
                     invisible="not genieacs_device_id"
@@ -49,7 +76,9 @@
                     string="Reboot CPE"
                     type="object"
                     title="Reboot CPE device via GenieACS TR-069"
-                    class="oe_highlight btn btn-warning m-2 flex-fill"
+                    onmouseover="this.classList.add('bg-warning', 'text-white')"
+                    onmouseout="this.classList.remove('bg-warning', 'text-white')"
+                    class="oe_highlight btn btn-secondary m-2 flex-fill"
                     role="button"
                     invisible="not genieacs_device_id"
                     confirm="Are you sure you want to reboot the CPE device? The customer will lose internet temporarily."
@@ -59,11 +88,25 @@
                     string="Reset CPE"
                     type="object"
                     title="Factory Reset CPE device via GenieACS TR-069"
-                    class="oe_highlight btn btn-danger m-2 flex-fill"
+                    onmouseover="this.classList.add('bg-danger', 'text-white')"
+                    onmouseout="this.classList.remove('bg-danger', 'text-white')"
+                    class="oe_highlight btn btn-secondary m-2 flex-fill"
                     role="button"
                     invisible="not genieacs_device_id"
                     confirm="DANGER! Factory reset will erase ALL configuration on the CPE device. The customer will need to be re-provisioned. Are you absolutely sure?"
                     icon="fa-eraser" />
+
+                <button name="%(geni_Acs_integrations.action_genieacs_pending_tasks_wizard)d"
+                    string="View Pending Tasks"
+                    type="action"
+                    title="View pending GenieACS tasks for this device"
+                    onmouseover="this.classList.add('bg-secondary', 'text-white')"
+                    onmouseout="this.classList.remove('bg-secondary', 'text-white')"
+                    class="oe_highlight btn btn-secondary m-2 flex-fill"
+                    role="button"
+                    invisible="not genieacs_device_id"
+                    context="{'default_device_id': genieacs_device_id}"
+                    icon="fa-tasks" />
             </xpath>
         </field>
     </record>

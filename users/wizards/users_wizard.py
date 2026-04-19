@@ -51,7 +51,7 @@ class UpdateUser(models.TransientModel):
 
 
     def action_update_password(self):
-        self.check_access()
+        # self.check_access()
         if self.field_value and self.user_id:
             radcheck_vals = {
                 "username": self.user_id.username,

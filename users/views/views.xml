@@ -33,12 +33,11 @@
                 <sheet>
 
                     <div class="oe_button_box" name="button_box">
-                        <button name="action_view_total_recharges"
+                        <button name="action_view_total_subscription"
                             type="object"
-                            title="Recharge History"
+                            string="Subscriptions"
                             class="oe_stat_button"
-                            icon="fa-history">
-                            <field name="recharge_count" widget="statinfo" string="History" />
+                            icon="fa-usd">
                         </button>
                         <button name="action_view_radcheck"
                             groups="base_security_groups.group_noc,base_security_groups.group_admin"
@@ -544,21 +543,25 @@
                                     </div>
                                 </div>
 
-<!--                               Ledger Details-->
-                                <div class="accordion-item m-2 border rounded-3">
-                                    <h2 class="accordion-header" id="headingLedgerDetails">
+<!--                               GenieACS CPE Details -->
+                                <div class="accordion-item m-2 border rounded-3"
+                                    name="cpe_details_accordion">
+                                    <h2 class="accordion-header" id="headingCpeDetails">
                                         <a class="accordion-button collapsed" type="button"
                                             data-bs-toggle="collapse"
-                                            data-bs-target="#collapseLedgerDetails"
+                                            data-bs-target="#collapseCpeDetails"
                                             aria-expanded="false"
-                                            aria-controls="collapseLedgerDetails">
-                                            <i class="fa fa-book fa-1x  me-3"></i> Ledger Details </a>
+                                            aria-controls="collapseCpeDetails">
+                                            <i class="fa fa-microchip fa-1x  me-3"></i> GenieACS CPE Details </a>
                                     </h2>
-                                    <div id="collapseLedgerDetails"
+                                    <div id="collapseCpeDetails"
                                         class="accordion-collapse collapse"
-                                        aria-labelledby="headingLedgerDetails">
-                                        <div class="accordion-body">
-                                            <p>Tested</p>
+                                        aria-labelledby="headingCpeDetails">
+                                        <div class="accordion-body" name="cpe_details_body">
+                                            <p class="text-muted">
+                                                <i class="fa fa-info-circle me-1"></i>
+                                                CPE details will appear here once GenieACS integration is configured.
+                                            </p>
                                         </div>
                                     </div>
                                 </div>

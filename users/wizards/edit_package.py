@@ -61,7 +61,7 @@ class UpdateUserProfile(models.TransientModel):
                 
                 
     def action_update_package(self):
-        self.check_access()
+        # self.check_access()
         
         if self.user_id and  self.field_value :
             

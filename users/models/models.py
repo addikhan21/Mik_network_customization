@@ -208,7 +208,6 @@ class Users(models.Model):
                     <i class="fa fa-check-circle text-success"></i> User <b>{self.name}</b> Recharged<br>
                     <b><i class="fa fa-calendar"></i> New Expiry:</b> {self.expiry_date}<br>
                     <b><i class="fa fa-refresh"></i> Recharge Status:</b> Completed<br>
-                    <b><i class="fa fa-history"></i> Total Recharges:</b> {self.recharge_count}<br>
                     <b> Updated by:</b> {self.env.user.name}<br>
                     <b> Date:</b> {fields.Datetime.now()}<br>
                 </div>
@@ -533,13 +532,15 @@ class Users(models.Model):
                 [("username", "=", record.username)]
             )
 
-    def action_view_total_recharges(self):
+    def action_view_total_subscription(self):
+        if not self.id_subscription:
+            return {}
         return {
-            "name": "Recharge History",
+            "name": "Subscription",
             "type": "ir.actions.act_window",
-            "res_model": "recharge.history",
-            "view_mode": "list,form",
-            "domain": [("user_id", "=", self.id)],
+            "res_model": "sale.subscription",
+            "view_mode": "form",
+            "res_id": int(self.id_subscription),
         }
 
     @api.model_create_multi
